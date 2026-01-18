@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, 0.72);
+  --card: rgba(15, 23, 42, 0.04);
+  --border: rgba(15, 23, 42, 0.12);
+
+  --chip-bg: #e8f0ff;
+  --chip-bg-hover: #dbeafe;
+  --chip-text: #1d4ed8;
+  --chip-border: #93c5fd;
+}
+
+html.dark {
+  --bg: #0b1220;
+  --text: rgba(255, 255, 255, 0.95);
+  --muted: rgba(255, 255, 255, 0.70);
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+
+  --chip-bg: rgba(59, 130, 246, 0.12);
+  --chip-bg-hover: rgba(59, 130, 246, 0.18);
+  --chip-text: rgba(219, 234, 254, 0.95);
+  --chip-border: rgba(59, 130, 246, 0.30);
+
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  font-family: "Bitter", serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.theme-bg { background: var(--bg); }
+.theme-text { color: var(--text); }
+.theme-muted { color: var(--muted); }
+.theme-card { background: var(--card); }
+.theme-border { border-color: var(--border); }
+
+.vanta-net canvas {
+  opacity: 0.35 !important;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.25));
+}
+
+html:not(.dark) .vanta-net canvas {
+  opacity: 0.22 !important;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.12));
+}
