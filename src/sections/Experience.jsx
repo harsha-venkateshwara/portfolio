@@ -44,10 +44,12 @@ export default function Experience() {
       dates: "Aug 2023 – Aug 2025",
       logo: "/images/logos/itron.png",
       bullets: [
-        "Co-led utility operations analytics and predictive modeling initiatives on large-scale operational datasets (70M+ records), delivering forecasting, risk classification, and standardized feature-ready datasets for repeatable analytics workflows.",
-        "Built and evaluated regression and classification models, improving forecasting accuracy by 18% through feature engineering, validation, and tuning.",
-        "Performed EDA and data-quality diagnostics to uncover operational risk patterns, cutting false positives by 30% and improving reliability of model-driven decisions.",
-        "Documented results with statistical metrics and communicated insights to cross-functional stakeholders through decision-focused walkthroughs.",
+        "Architected production ML pipelines for energy and utility analytics, supporting 8–10M+ smart-meter and sensor records across operational and analytical workflows.",
+        "Engineered regression, classification, and time-series models for load forecasting and anomaly detection, achieving 18–30% performance gains over statistical baselines",
+        "Streamlined large-scale data processing via advanced feature engineering, reducing data noise by 25% and improving downstream model stability in production.",
+        "Automated data ingestion, training, evaluation, and retraining workflows in Python, cutting manual analysis effort by 35% and accelerating experimentation cycles by 2×.",
+        "Collaborated with MV-90xi MDM product managers, domain experts, and engineers to translate ambiguous operational requirements into scalable ML solutions supporting data-driven decisions achieving client satisfaction rating of 4.87/5 for over 2 years",
+        "Implemented continuous model validation and monitoring strategies, maintaining >90% accuracy under evolving data distributions."
       ],
       tags: [
         "Python",
@@ -67,9 +69,11 @@ export default function Experience() {
       dates: "Jun 2022 – Jul 2023",
       logo: "/images/logos/kyono.png",
       bullets: [
-        "Built scalable e-commerce data pipelines to process clickstream transaction events into feature ready tables, cutting data prep and refresh time by 60% and enabling daily KPI model updates.",
+        "Delivered end-to-end ML solutions across 6–8 client projects in e-commerce, healthcare, and retail, owning full model lifecycle from data preparation to deployment.",
         "Developed customer intent, conversion prediction models with feature engineering and rigorous evaluation, improving AUC by 0.12 and increasing marketing targeting precision, reducing wasted outreach by 20%.",
-        "Delivered funnel analytics and experimentation insights, identifying key drop offs and optimization levers that improved checkout conversion by 8% and increased AOV by 5%.",
+        "Implemented recommendation and classification systems that improved personalization and operational insights by 10–20%.",
+        "Built scalable preprocessing and feature engineering pipelines handling 100K–1M+ records from heterogeneous data sources.",
+        "Integrated and optimized models in production systems with backend and frontend teams, reducing inference latency by 14% without sacrificing accuracy."
       ],
       tags: [
         "ETL/Data Pipelines",
@@ -86,9 +90,8 @@ export default function Experience() {
       dates: "Sep 2021 – Oct 2021",
       logo: "/images/logos/bel.png",
       bullets: [
-        "Developed predictive maintenance models with Python and Pandas, improving fault detection accuracy by 15%.",
-        "Performed data cleaning, statistical analysis, and interpretation to support operational decision-making.",
-        "Composed technical reports and delivered findings to engineering and defense teams, improving adoption of data solutions.",
+        "Supported defense analytics initiatives for Indian Air Force systems in a mission-critical, security-restricted environment,contributing to operational data analysis and reporting.",
+        "Analyzed and visualized sensitive operational datasets, adhering to 100% security and documentation compliance while following high-reliability practices for accuracy, validation, and traceability.",
       ],
       tags: [
         "Python",
