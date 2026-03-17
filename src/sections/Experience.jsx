@@ -42,7 +42,6 @@ export default function Experience() {
       role: "Graduate Research Assistant",
       company: "Research Foundation for SUNY",
       dates: "Jan 2026 – Present",
-      logo: "/images/logos/itron.png",
       bullets: [
         "Investigate perception and planning architectures for autonomous vehicles using ROS2 and Autoware within physics-accurate digital twin simulation environments, contributing to real-world deployment research",
         "Develop real-time system integration modules in C++ on Linux, containerized via Docker; advancing multi-sensor fusion and autonomous control pipelines for next-generation AV stacks"
