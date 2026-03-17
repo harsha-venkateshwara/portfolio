@@ -41,10 +41,13 @@ export default function Experience() {
     {
       role: "Graduate Research Assistant",
       company: "Research Foundation for SUNY",
+      logo: "/images/logos/itron.png",
       dates: "Jan 2026 – Present",
       bullets: [
-        "Investigate perception and planning architectures for autonomous vehicles using ROS2 and Autoware within physics-accurate digital twin simulation environments, contributing to real-world deployment research",
-        "Develop real-time system integration modules in C++ on Linux, containerized via Docker; advancing multi-sensor fusion and autonomous control pipelines for next-generation AV stacks"
+        "Investigated perception and planning architectures for autonomous vehicles using ROS2 and Autoware within physics-accurate digital twin simulation environments, contributing to real-world deployment research",
+        "Developed real-time system integration modules in C++ on Linux, containerized via Docker; advancing multi-sensor fusion and autonomous control pipelines for next-generation AV stacks",
+        "Designed feature engineering pipelines for raw vehicle telemetry and sensor streams, transforming high-frequency spatial data into structured inputs for downstream perception and behavior-prediction models.",
+        "Architected modular ROS2 node interfaces bridging Autoware's planning stack with digital twin simulation, reducing hardware-in-the-loop testing overhead and enabling rapid iteration on autonomous control algorithms"
       ],
       tags: [
         "C++",
