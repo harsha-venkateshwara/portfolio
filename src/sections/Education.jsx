@@ -6,7 +6,7 @@ export default function Education() {
 
   const schools = [
     {
-      name: "University at Buffalo (SUNY)",
+      name: "University at Buffalo, The State University of New York",
       year: "2025 – 2026",
       degree: "MS, Computer Science & Engineering (AI/ML Track)",
       lines: [

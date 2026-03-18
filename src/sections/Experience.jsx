@@ -66,7 +66,7 @@ export default function Experience() {
       dates: "Aug 2023 – Aug 2025",
       logo: "/images/logos/itron.png",
       bullets: [
-        "Architected production ML pipelines for energy and utility analytics, supporting 8–10M+ smart-meter and sensor records across operational and analytical workflows.",
+        "Architected production ML pipelines for energy and utility analytics for MV-90xi meter data management application, supporting 8–10M+ smart-meter and sensor records across operational and analytical workflows.",
         "Engineered regression, classification, and time-series models for load forecasting and anomaly detection, achieving 18–30% performance gains over statistical baselines",
         "Streamlined large-scale data processing via advanced feature engineering, reducing data noise by 25% and improving downstream model stability in production.",
         "Automated data ingestion, training, evaluation, and retraining workflows in Python, cutting manual analysis effort by 35% and accelerating experimentation cycles by 2×.",
