@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Globe from "react-globe.gl";
+import SectionHeader from "../components/SectionHeader";
 
 export default function Personal() {
   const photos = useMemo(
@@ -24,20 +25,19 @@ export default function Personal() {
         key: "travel",
         icon: "✈️",
         title: "Traveling",
-        desc: "Driven by curiosity, I explore new possibilities across the globe embracing fresh experiences and learning from diverse perspectives.",
+        desc: "Driven by curiosity, I explore new possibilities across the globe, embracing fresh experiences and learning from diverse perspectives.",
       },
       {
         key: "photo",
         icon: "📸",
         title: "Photography",
-        desc: "I love wandering new cities on foot and uncovering hidden spots. Here are a few shots I captured during my time in New York.",
+        desc: "Wandering new cities on foot and uncovering hidden spots. A few shots from my time in New York.",
       },
     ],
     []
   );
 
   const [active, setActive] = useState("travel");
-
   const [idx, setIdx] = useState(0);
   const [playing, setPlaying] = useState(true);
   const total = photos.length;
@@ -49,11 +49,7 @@ export default function Personal() {
     if (active !== "photo") return;
     if (!playing) return;
     if (total <= 1) return;
-
-    const t = setInterval(() => {
-      setIdx((p) => (p + 1) % total);
-    }, 3500);
-
+    const t = setInterval(() => setIdx((p) => (p + 1) % total), 3500);
     return () => clearInterval(t);
   }, [active, playing, total]);
 
@@ -63,13 +59,11 @@ export default function Personal() {
 
   useEffect(() => {
     if (active !== "photo") return;
-
     const onKey = (e) => {
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
       if (e.key === " ") setPlaying((s) => !s);
     };
-
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [active, total]);
@@ -85,41 +79,35 @@ export default function Personal() {
   useEffect(() => {
     const update = () => setIsDark(document.documentElement.classList.contains("dark"));
     update();
-
     const mo = new MutationObserver(update);
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-
     return () => mo.disconnect();
   }, []);
 
   useEffect(() => {
     if (active !== "travel") return;
     if (!globeWrapRef.current) return;
-
     const el = globeWrapRef.current;
-
     const ro = new ResizeObserver(() => {
       const rect = el.getBoundingClientRect();
-      const w = Math.max(0, Math.floor(rect.width));
-      const h = Math.max(0, Math.floor(rect.height));
-      setGlobeSize({ w, h });
+      setGlobeSize({
+        w: Math.max(0, Math.floor(rect.width)),
+        h: Math.max(0, Math.floor(rect.height)),
+      });
     });
-
     ro.observe(el);
-
     const rect = el.getBoundingClientRect();
     setGlobeSize({
       w: Math.max(0, Math.floor(rect.width)),
       h: Math.max(0, Math.floor(rect.height)),
     });
-
     return () => ro.disconnect();
   }, [active]);
 
   const travelPins = useMemo(
     () => [
-      { label: "New York, USA", lat: 40.7128, lng: -74.006, group: "USA", color: "#3b82f6" },
-      { label: "Buffalo, USA", lat: 42.8864, lng: -78.8784, group: "USA", color: "#3b82f6" },
+      { label: "New York, USA", lat: 40.7128, lng: -74.006, group: "USA", color: "#60a5fa" },
+      { label: "Buffalo, USA", lat: 42.8864, lng: -78.8784, group: "USA", color: "#60a5fa" },
       { label: "Bengaluru, India", lat: 12.9716, lng: 77.5946, group: "Asia", color: "#a855f7" },
       { label: "Goa, India", lat: 15.2993, lng: 74.124, group: "Asia", color: "#a855f7" },
     ],
@@ -129,7 +117,6 @@ export default function Personal() {
   useEffect(() => {
     if (active !== "travel") return;
     if (!globeRef.current) return;
-
     const controls = globeRef.current.controls?.();
     if (controls) {
       controls.enableDamping = true;
@@ -137,7 +124,6 @@ export default function Personal() {
       controls.rotateSpeed = 0.4;
       controls.zoomSpeed = 0.7;
     }
-
     globeRef.current.pointOfView({ lat: 20, lng: -40, altitude: 2.2 }, 0);
     setGlobeReady(true);
   }, [active]);
@@ -148,24 +134,21 @@ export default function Personal() {
     : "//unpkg.com/three-globe/example/img/sky.png";
 
   return (
-    <section id="personal" className="py-24 bg-[color:var(--bg)]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="text-4xl sm:text-5xl font-bold text-[color:var(--text)] mb-4">
-            Personal
-          </h2>
-          <p className="text-lg text-[color:var(--muted)] max-w-2xl mx-auto">
-            Beyond the professional realm — my interests and personal pursuits
-          </p>
-        </div>
+    <section id="personal" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SectionHeader
+          index="06"
+          label="personal"
+          title="Beyond the work: places I've been, things I've seen."
+          subtitle="The human layer. Travel maps and a small photo set from streets I've walked."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
-            <h3 className="text-2xl font-semibold text-[color:var(--text)] text-center mb-8">
-              Interests &amp; Hobbies
-            </h3>
-
-            <div className="max-w-sm mx-auto w-full flex flex-col space-y-5">
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-4">
+            <div className="font-mono text-[12px] uppercase tracking-[0.18em] text-[color:var(--subtle)] mb-5">
+              / interests &amp; hobbies
+            </div>
+            <div className="flex flex-col gap-3">
               {interests.map((it) => {
                 const selected = isActive(it.key);
                 return (
@@ -173,33 +156,26 @@ export default function Personal() {
                     key={it.key}
                     type="button"
                     onClick={() => setActive(it.key)}
+                    aria-pressed={selected}
                     className={[
-                      "w-full text-left p-5 rounded-2xl border",
-                      "transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+                      "w-full text-left p-6 rounded-2xl border transition-all duration-300",
                       selected
-                        ? "border-blue-500/40 bg-blue-500/10 shadow-lg shadow-black/10"
-                        : "border-[color:var(--border)] bg-[color:var(--card)] hover:brightness-105",
+                        ? "border-[color:var(--accent)]/40 bg-[color:var(--accent-soft)] shadow-lg shadow-black/10"
+                        : "border-[color:var(--border)] bg-[color:var(--surface)] hover:border-[color:var(--border-strong)] hover:-translate-y-0.5",
                     ].join(" ")}
                   >
                     <div className="flex items-start gap-4">
-                      <div className="text-2xl shrink-0 mt-0.5">{it.icon}</div>
+                      <div className="text-3xl shrink-0 mt-0.5">{it.icon}</div>
                       <div>
                         <h4
                           className={[
-                            "text-lg font-semibold mb-2",
-                            selected ? "text-blue-600 dark:text-blue-200" : "text-[color:var(--text)]",
+                            "font-display text-xl font-semibold mb-2",
+                            selected ? "text-[color:var(--accent-text)]" : "text-[color:var(--text)]",
                           ].join(" ")}
                         >
                           {it.title}
                         </h4>
-                        <p
-                          className={[
-                            "text-sm leading-relaxed",
-                            selected ? "text-blue-700/80 dark:text-blue-100/80" : "text-[color:var(--muted)]",
-                          ].join(" ")}
-                        >
-                          {it.desc}
-                        </p>
+                        <p className="text-[15px] leading-relaxed text-[color:var(--muted)]">{it.desc}</p>
                       </div>
                     </div>
                   </button>
@@ -208,22 +184,27 @@ export default function Personal() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-8">
             {active === "travel" ? (
-              <>
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-semibold text-[color:var(--text)]">
-                    Places I've traveled to
-                  </h3>
-                  <p className="mt-2 text-[color:var(--muted)]">
-                    Explore the amazing destinations I've visited around the globe
-                  </p>
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold text-[color:var(--text)] tracking-tight">
+                      Places I&apos;ve been
+                    </h3>
+                    <p className="mt-2 text-base text-[color:var(--muted)]">
+                      Drag to explore · click pins for details.
+                    </p>
+                  </div>
+                  <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
+                    {travelPins.length} pins
+                  </span>
                 </div>
 
                 <div className="relative">
                   <div
                     ref={globeWrapRef}
-                    className="w-full h-72 sm:h-96 md:h-[500px] rounded-2xl overflow-hidden bg-[color:var(--card)] border border-[color:var(--border)] shadow-lg shadow-black/10"
+                    className="w-full h-80 sm:h-96 md:h-[520px] rounded-2xl overflow-hidden bg-[color:var(--surface)] border border-[color:var(--border)] shadow-xl shadow-black/20"
                   >
                     <div className="w-full h-full flex items-center justify-center">
                       {globeSize.w > 0 && globeSize.h > 0 ? (
@@ -245,39 +226,47 @@ export default function Personal() {
                       ) : null}
                     </div>
 
-                    <div className="absolute bottom-4 right-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--card)]/90 backdrop-blur p-3 text-xs text-[color:var(--text)] max-w-xs">
-                      <p className="mb-2">🌍 Drag to explore • Click pins for details</p>
+                    <div className="absolute bottom-4 right-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)]/90 backdrop-blur p-3 text-xs text-[color:var(--text)] max-w-xs">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--subtle)] mb-2">
+                        Legend
+                      </div>
                       <div className="flex flex-wrap gap-3">
                         <span className="inline-flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-blue-500" /> USA
+                          <span className="h-2 w-2 rounded-full bg-blue-400" /> USA
                         </span>
                         <span className="inline-flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-purple-500" /> Asia
+                          <span className="h-2 w-2 rounded-full bg-purple-400" /> Asia
                         </span>
                       </div>
                     </div>
                   </div>
-
                   {!globeReady ? (
-                    <div className="mt-3 text-center text-xs text-[color:var(--muted)]">
+                    <div className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
                       Loading globe…
                     </div>
                   ) : null}
                 </div>
-              </>
+              </div>
             ) : null}
 
             {active === "photo" ? (
-              <>
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-semibold text-[color:var(--text)]">Photography</h3>
-                  <p className="mt-2 text-[color:var(--muted)]">
-                    A collection of moments and landscapes captured through my lens
-                  </p>
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold text-[color:var(--text)] tracking-tight">
+                      Photography
+                    </h3>
+                    <p className="mt-2 text-base text-[color:var(--muted)]">
+                      Moments and landscapes captured through my lens.
+                    </p>
+                  </div>
+                  <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
+                    {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                  </span>
                 </div>
 
                 <div className="relative">
-                  <div className="w-full h-72 sm:h-96 md:h-[500px] rounded-2xl overflow-hidden bg-[color:var(--card)] border border-[color:var(--border)] shadow-lg shadow-black/10">
+                  <div className="w-full h-80 sm:h-96 md:h-[520px] rounded-2xl overflow-hidden bg-[color:var(--surface)] border border-[color:var(--border)] shadow-xl shadow-black/20">
                     <img
                       src={photos[idx]}
                       alt={`Photo ${idx + 1}`}
@@ -291,52 +280,61 @@ export default function Personal() {
                     <button
                       type="button"
                       onClick={() => setPlaying((s) => !s)}
-                      className="absolute top-4 right-4 h-10 w-10 rounded-full bg-black/45 hover:bg-black/60 border border-white/10 grid place-items-center text-white/90 transition"
+                      className="absolute top-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-black/45 hover:bg-black/65 border border-white/15 text-white transition"
                       aria-label={playing ? "Pause slideshow" : "Play slideshow"}
-                      title={playing ? "Pause" : "Play"}
                     >
-                      {playing ? <span className="text-sm font-semibold">II</span> : <span className="text-sm font-semibold">▶</span>}
+                      {playing ? (
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5z" /></svg>
+                      )}
                     </button>
 
                     <button
                       type="button"
                       onClick={prev}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-black/45 hover:bg-black/60 border border-white/10 grid place-items-center text-white/90 transition"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-black/45 hover:bg-black/65 border border-white/15 text-white transition"
                       aria-label="Previous image"
                     >
-                      <span className="text-2xl leading-none">‹</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
                     </button>
 
                     <button
                       type="button"
                       onClick={next}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-black/45 hover:bg-black/60 border border-white/10 grid place-items-center text-white/90 transition"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-black/45 hover:bg-black/65 border border-white/15 text-white transition"
                       aria-label="Next image"
                     >
-                      <span className="text-2xl leading-none">›</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
                     </button>
 
-                    <div className="absolute left-4 bottom-4 rounded-full bg-black/45 border border-white/10 px-3 py-1 text-xs text-white/90">
-                      {idx + 1}/{total}
+                    <div className="absolute left-4 bottom-4 rounded-full bg-black/45 border border-white/10 px-3 py-1 font-mono text-[11px] text-white/90">
+                      {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                     </div>
                   </div>
 
-                  <div className="mt-5 flex justify-center gap-3 flex-wrap">
+                  <div className="mt-5 flex justify-center items-center gap-1.5 flex-wrap">
                     {photos.map((_, i) => (
                       <button
                         key={i}
                         type="button"
                         onClick={() => setIdx(i)}
-                        className={[
-                          "h-3 w-3 rounded-full transition",
-                          i === idx ? "bg-blue-500" : "bg-black/15 dark:bg-white/15 hover:bg-black/25 dark:hover:bg-white/30",
-                        ].join(" ")}
+                        className="p-1.5"
                         aria-label={`Go to image ${i + 1}`}
-                      />
+                      >
+                        <span
+                          className={[
+                            "block h-1.5 rounded-full transition-all duration-300",
+                            i === idx
+                              ? "w-6 bg-[color:var(--text)]"
+                              : "w-2 bg-[color:var(--border-strong)]",
+                          ].join(" ")}
+                        />
+                      </button>
                     ))}
                   </div>
                 </div>
-              </>
+              </div>
             ) : null}
           </div>
         </div>

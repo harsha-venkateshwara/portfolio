@@ -3,25 +3,29 @@ import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Education from "./sections/Education";
 import Experience from "./sections/Experience";
+import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
 import Personal from "./sections/Personal";
 import Contact from "./sections/Contact";
+import Footer from "./components/Footer";
+import Chatbot from "./components/Chatbot";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
+    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)] selection:bg-blue-500/20">
       <Navbar />
-      <Hero />
-      <About />
-      <Education />
-      <Experience />
-      <Skills />
-      <Personal />
-      <Contact />
-
-      <footer className="mt-16 border-t border-[color:var(--border)] pt-8 text-center text-xs text-[color:var(--muted)]">
-        © {new Date().getFullYear()} Harsha Venkateshwara — All rights reserved.
-      </footer>
+      <main>
+        <Hero />
+        <About />
+        <Education />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Personal />
+        <Contact />
+      </main>
+      <Footer />
+      <Chatbot />
     </div>
   );
 }

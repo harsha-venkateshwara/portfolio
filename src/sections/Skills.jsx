@@ -1,4 +1,5 @@
 import React from "react";
+import SectionHeader from "../components/SectionHeader";
 
 function SkillChip({ children }) {
   return (
@@ -8,7 +9,7 @@ function SkillChip({ children }) {
         borderColor: "var(--chip-border)",
         color: "var(--chip-text)",
       }}
-      className="rounded-full border px-3 py-1 text-xs font-medium transition"
+      className="rounded-full border px-3 py-1.5 text-[12px] font-mono font-medium transition"
       onMouseEnter={(e) => (e.currentTarget.style.background = "var(--chip-bg-hover)")}
       onMouseLeave={(e) => (e.currentTarget.style.background = "var(--chip-bg)")}
     >
@@ -17,14 +18,13 @@ function SkillChip({ children }) {
   );
 }
 
-
 function Group({ title, items }) {
   return (
-    <div className="mt-5">
-      <div className="text-sm font-semibold text-[color:var(--text)]/90">
+    <div className="mt-6">
+      <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--subtle)] mb-3">
         {title}
       </div>
-      <div className="mt-2 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {items.map((x) => (
           <SkillChip key={x}>{x}</SkillChip>
         ))}
@@ -33,25 +33,21 @@ function Group({ title, items }) {
   );
 }
 
-function CategoryCard({ title, subtitle, groups }) {
+function CategoryCard({ id, title, capability, groups, accent }) {
   return (
-    <div
-      className={[
-        "rounded-2xl bg-[color:var(--card)] border border-[color:var(--border)] shadow-lg shadow-black/10",
-        "p-7 transition-all duration-300 ease-out",
-        "hover:-translate-y-2 hover:shadow-xl hover:shadow-black/15",
-      ].join(" ")}
-    >
-      <div className="mb-2">
-        <h3 className="text-lg sm:text-xl font-semibold text-[color:var(--text)]">
+    <div className="card relative p-8 lg:p-9 hover:-translate-y-1 transition-transform">
+      <div className={`absolute top-8 right-8 grid h-10 w-10 place-items-center rounded-full ${accent} text-[12px] font-mono font-semibold`}>
+        {id}
+      </div>
+
+      <div className="pr-14">
+        <h3 className="font-display text-2xl sm:text-[26px] font-bold text-[color:var(--text)] leading-tight tracking-tight">
           {title}
         </h3>
-        {subtitle ? (
-          <p className="mt-1 text-sm text-[color:var(--muted)] leading-relaxed">
-            {subtitle}
-          </p>
-        ) : null}
+        <p className="mt-4 text-[15px] text-[color:var(--muted)] leading-relaxed">{capability}</p>
       </div>
+
+      <div className="mt-7 h-px bg-[color:var(--border)]" />
 
       {groups.map((g) => (
         <Group key={g.title} title={g.title} items={g.items} />
@@ -63,126 +59,73 @@ function CategoryCard({ title, subtitle, groups }) {
 export default function Skills() {
   const categories = [
     {
-      title: "Programming & Data Science Foundations",
-      subtitle:
-        "Core languages and libraries used for data analysis, modeling, and building production-ready systems.",
+      id: "01",
+      title: "Programming & Data Science",
+      capability:
+        "I build production-grade data pipelines and analytical models, from raw ingestion to evaluated documented output, using the standard Python data stack and adjacent languages.",
+      accent: "bg-blue-500/10 text-blue-300 border border-blue-500/30",
       groups: [
-        {
-          title: "Languages",
-          items: ["Python", "C/C++", "SQL", "JavaScript/TypeScript", "R", "Shell/Bash"],
-        },
+        { title: "Languages", items: ["Python", "C/C++", "SQL", "JavaScript/TypeScript", "R", "Shell/Bash"] },
         {
           title: "Python Libraries",
-          items: [
-            "NumPy",
-            "Pandas",
-            "Matplotlib",
-            "Seaborn",
-            "scikit-learn",
-            "TensorFlow",
-            "PyTorch",
-            "OpenCV",
-            "BeautifulSoup",
-            "Transformers",
-            "NLTK",
-            "statsmodels",
-            "FastAPI",
-          ],
+          items: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "scikit-learn", "TensorFlow", "PyTorch", "OpenCV", "BeautifulSoup", "Transformers", "NLTK", "statsmodels", "FastAPI"],
         },
-        {
-          title: "Data Analysis",
-          items: ["EDA", "Feature Engineering", "Hyperparameter Tuning", "A/B Testing"],
-        },
+        { title: "Analysis", items: ["EDA", "Feature Engineering", "Hyperparameter Tuning", "A/B Testing"] },
       ],
     },
     {
-      title: "Machine Learning, Deep Learning & Generative AI",
-      subtitle:
-        "Model development across classical ML, deep learning, and modern LLM workflows.",
+      id: "02",
+      title: "Machine Learning, Deep Learning & GenAI",
+      capability:
+        "Designing and shipping models across classical ML, deep learning, and modern LLM workflows, with rigorous evaluation, monitoring, and tradeoff awareness around latency, cost, and quality.",
+      accent: "bg-purple-500/10 text-purple-300 border border-purple-500/30",
       groups: [
-        {
-          title: "ML Techniques",
-          items: [
-            "Supervised/Unsupervised learning",
-            "Classification",
-            "Regression",
-            "Ensemble methods",
-            "Time series modelling",
-            "Model Evaluation & Interpretability",
-          ],
-        },
-        {
-          title: "Deep Learning",
-          items: ["Neural Networks", "CNNs", "Transfer Learning", "Computer Vision"],
-        },
-        {
-          title: "NLP & LLMs",
-          items: [
-            "LLMs",
-            "RAG",
-            "Fine-tuning",
-            "Prompt Engineering",
-            "Vector DBs",
-            "Evaluation Metrics",
-          ],
-        },
+        { title: "ML Techniques", items: ["Supervised/Unsupervised", "Classification", "Regression", "Ensembles", "Time-series", "Model Evaluation"] },
+        { title: "Deep Learning", items: ["Neural Networks", "CNNs", "Transfer Learning", "Computer Vision"] },
+        { title: "NLP & LLMs", items: ["LLMs", "RAG", "Fine-tuning", "Prompt Engineering", "Vector DBs", "Eval Metrics"] },
       ],
     },
     {
+      id: "03",
       title: "Big Data, Cloud & MLOps",
-      subtitle:
-        "Scalable data processing, orchestration, and ML lifecycle tooling for deployment and monitoring.",
+      capability:
+        "Scaling data processing and operationalizing ML: orchestrating pipelines, deploying models, and monitoring them across distributed systems and major cloud platforms.",
+      accent: "bg-emerald-500/10 text-emerald-300 border border-emerald-500/30",
       groups: [
         { title: "Big Data", items: ["Hadoop", "Apache Spark"] },
-        {
-          title: "Data Engineering",
-          items: [
-            "Apache Kafka",
-            "Apache Airflow",
-            "ETL/ELT pipelines",
-            "NoSQL (MongoDB, Neo4j)",
-            "Redis",
-            "ELK",
-          ],
-        },
+        { title: "Data Engineering", items: ["Apache Kafka", "Apache Airflow", "ETL/ELT", "MongoDB", "Neo4j", "Redis", "ELK"] },
         { title: "MLOps", items: ["MLFlow", "Weights & Biases", "CI/CD", "GitHub Actions"] },
-        { title: "DevOps & Deployment", items: ["Docker", "Kubernetes"] },
-        { title: "Cloud Platforms", items: ["AWS", "Azure", "GCP", "Databricks"] },
+        { title: "DevOps", items: ["Docker", "Kubernetes"] },
+        { title: "Cloud", items: ["AWS", "Azure", "GCP", "Databricks"] },
       ],
     },
     {
+      id: "04",
       title: "Web Development & BI",
-      subtitle:
-        "Frontend, backend, and BI tools used to ship user-facing analytics and applications.",
+      capability:
+        "Building user-facing analytics, from React-based dashboards and APIs to BI reports, closing the loop between models and the people who act on them.",
+      accent: "bg-amber-500/10 text-amber-300 border border-amber-500/30",
       groups: [
         { title: "Web Frameworks", items: ["React", "Solid.js", "Node.js", "FastAPI"] },
-        { title: "Frontend & Tools", items: ["TailwindCSS", "Figma", "Git", "GitHub", "Gitlab"] },
+        { title: "Frontend & Tools", items: ["TailwindCSS", "Figma", "Git", "GitHub", "GitLab"] },
         { title: "BI Tools", items: ["Power BI", "Tableau", "Qlik Sense"] },
       ],
     },
   ];
 
   return (
-    <section id="skills" className="py-24 bg-[color:var(--bg)]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="text-4xl sm:text-5xl font-bold text-[color:var(--text)] mb-4">
-            Skills & Expertise
-          </h2>
-          <p className="text-lg text-[color:var(--muted)] max-w-3xl mx-auto">
-            A consolidated view of my technical toolkit across data science, machine learning,
-            generative AI, cloud, MLOps, and full-stack analytics delivery.
-          </p>
-        </div>
+    <section id="skills" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SectionHeader
+          index="05"
+          label="capabilities"
+          title="The toolkit: organized by what I can build, not by what I've clicked."
+          subtitle="Skills grouped by capability with honest depth. No percentage bars, no decorative logo walls."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {categories.map((c) => (
-            <CategoryCard
-              key={c.title}
-              title={c.title}
-              subtitle={c.subtitle}
-              groups={c.groups}
-            />
+            <CategoryCard key={c.id} {...c} />
           ))}
         </div>
       </div>

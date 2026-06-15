@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx vite *)",
+      "Bash(curl -s http://localhost:5173/)",
+      "Bash(curl -v http://localhost:5173/)",
+      "Bash(kill b0m4o5cwn *)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(node -e ' *)",
+      "Bash(npx eslint *)",
+      "Bash(grep -E \"\\\\.\\(ipynb|py\\)$\")",
+      "Bash(grep -E \"\\\\.\\(ipynb|txt\\)$\")",
+      "Bash(python3 *)"
+    ]
+  }
+}
