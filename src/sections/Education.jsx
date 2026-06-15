@@ -110,7 +110,7 @@ export default function Education() {
               <span>·</span>
               <span>/ continuing education</span>
             </div>
-            <h3 className="mt-5 font-display text-3xl sm:text-4xl font-bold text-[color:var(--text)] tracking-tight">
+            <h3 className="mt-5 font-display text-h3 font-bold text-[color:var(--text)]">
               A lifelong learner committed to staying current.
             </h3>
           </div>

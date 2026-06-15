@@ -10,7 +10,11 @@
       "Bash(npx eslint *)",
       "Bash(grep -E \"\\\\.\\(ipynb|py\\)$\")",
       "Bash(grep -E \"\\\\.\\(ipynb|txt\\)$\")",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(git -C \"/mnt/c/Users/harsh/OneDrive - Global Academy of Technology/Desktop/myprojects/Harsha Venkateshwara - AI Engineer\" status)",
+      "Bash(git -C \"/mnt/c/Users/harsh/OneDrive - Global Academy of Technology/Desktop/myprojects/Harsha Venkateshwara - AI Engineer\" diff --stat)",
+      "Bash(npm run *)",
+      "Bash(node -e \"const s = require\\('fs'\\).readFileSync\\('src/sections/Experience.jsx', 'utf8'\\); console.log\\('lines:', s.split\\('\\\\n'\\).length\\); console.log\\('roles count:', \\(s.match\\(/role: \\\\\"/g\\) || []\\).length\\); console.log\\('featured count:', \\(s.match\\(/featured: true/g\\) || []\\).length\\); console.log\\('logo count:', \\(s.match\\(/logo: \\\\\"/g\\) || []\\).length\\);\")"
     ]
   }
 }

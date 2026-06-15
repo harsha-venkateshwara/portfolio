@@ -151,13 +151,13 @@ export default function About() {
 
           <div className="lg:col-span-7 space-y-12">
             <div className="space-y-7">
-              <p className="text-xl sm:text-[22px] text-[color:var(--muted)] leading-relaxed">
+              <p className="text-lead text-[color:var(--muted)]">
                 I&apos;m an AI/ML Engineer pursuing a Master&apos;s degree from the State
                 University of New York at Buffalo. I specialize in generative AI, data science,
                 machine learning, big data, and product development. Building data-driven
                 solutions to real-world challenges and optimizing critical processes.
               </p>
-              <p className="text-xl sm:text-[22px] text-[color:var(--muted)] leading-relaxed">
+              <p className="text-lead text-[color:var(--muted)]">
                 I&apos;ve worked across energy &amp; utilities, defense, and e-commerce in both
                 private and public sector environments, delivering end-to-end analytics and ML
                 solutions on large-scale datasets. My focus is practical, scalable systems:

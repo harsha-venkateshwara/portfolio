@@ -365,10 +365,10 @@ function FeaturedCard({ p }) {
             </span>
           </div>
 
-          <h3 className="font-display text-3xl sm:text-4xl lg:text-[2.6rem] font-bold text-[color:var(--text)] leading-[1.08] tracking-tight">
+          <h3 className="font-display text-h3 font-bold text-[color:var(--text)]">
             {p.title}
           </h3>
-          <p className="mt-4 text-xl text-[color:var(--muted)] leading-relaxed">
+          <p className="mt-4 text-lead text-[color:var(--muted)]">
             {p.tagline}
           </p>
 

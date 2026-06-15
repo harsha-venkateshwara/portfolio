@@ -58,12 +58,12 @@ export default function Contact() {
                   </span>
                 </div>
 
-                <h3 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[color:var(--text)] leading-[1.05] tracking-tight">
+                <h3 className="font-display text-h2 font-bold text-[color:var(--text)]">
                   Building something ambitious?<br />
                   <span className="italic font-medium text-[color:var(--accent-text)]">Let&apos;s talk.</span>
                 </h3>
 
-                <p className="mt-6 text-xl text-[color:var(--muted)] leading-relaxed max-w-xl">
+                <p className="mt-6 text-lead text-[color:var(--muted)] max-w-xl">
                   Open to internships, full-time, and part-time AI/ML, Data Science, Analytics, and
                   GenAI roles. Reach out. I respond within 24 hours.
                 </p>

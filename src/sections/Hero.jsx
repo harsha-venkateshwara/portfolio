@@ -118,19 +118,19 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-24 lg:pt-40 lg:pb-32">
-        <div className="mb-12 flex flex-wrap items-center gap-4">
+      <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 pt-28 pb-20 lg:pt-32 lg:pb-24">
+        <div className="mb-10 flex flex-wrap items-center gap-4">
           <StatusPill />
           <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
             New York · Open to remote / relocation
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
           <div className="lg:col-span-8">
             <p className="eyebrow mb-6">Harsha Venkateshwara · portfolio.2026</p>
 
-            <h1 className="font-display font-bold leading-[0.95] tracking-tight text-[color:var(--text)] text-[3.25rem] sm:text-[4.25rem] lg:text-[5.5rem] xl:text-[6.25rem]">
+            <h1 className="font-display font-bold text-display text-[color:var(--text)]">
               Building intelligent systems
               <br className="hidden sm:block" />{" "}
               that turn raw data into{" "}
@@ -139,14 +139,15 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="mt-10 max-w-2xl text-xl lg:text-2xl text-[color:var(--muted)] leading-relaxed">
+            <p className="mt-8 max-w-2xl text-lead text-[color:var(--muted)]">
               I&apos;m an AI/ML Engineer working across GenAI, machine learning, and big-data
-              systems, from production pipelines for energy analytics at Itron to autonomous-vehicle
-              research at SUNY. Currently completing an MS in Computer Science at the University at
+              systems - from production ML pipelines for energy analytics at Itron, to
+              autonomous-vehicle research at SUNY, and now building agentic AI systems at
+              Commvault. Currently completing an MS in Computer Science at the University at
               Buffalo.
             </p>
 
-            <div className="mt-12 flex flex-wrap items-center gap-3">
+            <div className="mt-10 flex flex-wrap items-center gap-3">
               <a href="#projects" className="btn-primary" aria-label="View projects">
                 View projects
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -179,11 +180,11 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 max-w-2xl border-t border-[color:var(--border)] pt-10">
+            <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 max-w-2xl border-t border-[color:var(--border)] pt-8">
               <Meta label="Experience" value="3+ years" />
               <Meta label="Focus" value="GenAI · ML · Data" />
               <Meta label="Education" value="MS @ UB" />
-              <Meta label="Currently" value="GRA, SUNY" />
+              <Meta label="Currently" value="AI Engineer @ Commvault" />
             </div>
           </div>
 
@@ -205,9 +206,9 @@ export default function Hero() {
                   Currently
                 </div>
                 <div className="text-[15px] font-semibold text-white mt-1.5 leading-snug">
-                  Graduate Research Assistant
+                  AI Engineer Intern
                   <br />
-                  Research Foundation for SUNY
+                  Commvault
                 </div>
               </div>
             </div>

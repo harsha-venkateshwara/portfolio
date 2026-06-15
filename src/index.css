@@ -77,6 +77,36 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* Fluid type scale — capped so headings stay MAANG-grade on 1440-1920px screens. */
+.text-display {
+  font-size: clamp(2.5rem, 1.5rem + 4.4vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+.text-h2 {
+  font-size: clamp(1.875rem, 1.25rem + 2.6vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+}
+.text-h3 {
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+}
+.text-lead {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.55;
+}
+.text-body-lg {
+  font-size: clamp(1rem, 0.95rem + 0.22vw, 1.125rem);
+  line-height: 1.6;
+}
+.section-py {
+  padding-top: clamp(4rem, 4vw + 3rem, 7rem);
+  padding-bottom: clamp(4rem, 4vw + 3rem, 7rem);
 }
 
 section[id] {

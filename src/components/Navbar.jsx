@@ -83,8 +83,12 @@ export default function Navbar() {
             className="group inline-flex items-center gap-3 text-[color:var(--text)]"
             aria-label="Home"
           >
-            <span className="grid h-11 w-11 place-items-center rounded-xl border border-[color:var(--border-strong)] bg-[color:var(--surface)] font-display text-lg font-bold tracking-tight">
-              hv
+            <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl border border-[color:var(--border-strong)] bg-[color:var(--surface)] transition-transform duration-300 group-hover:scale-105">
+              <img
+                src="/images/nav%20logo.jpeg"
+                alt="Harsha Venkateshwara"
+                className="h-full w-full object-cover"
+              />
             </span>
             <span className="hidden sm:flex flex-col leading-none">
               <span className="text-[15px] font-semibold tracking-tight">

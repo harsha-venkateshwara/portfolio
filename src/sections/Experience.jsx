@@ -18,9 +18,31 @@ function TagChip({ children }) {
 
 const roles = [
   {
+    role: "AI Engineer Intern",
+    company: "Commvault",
+    logo: "/images/Commvault.png",
+    dates: "May 2026 – Present",
+    current: true,
+    featured: true,
+    summary:
+      "Building agentic RAG pipelines for automated Summary of Findings generation from Dynamics 365 CRM data, cutting documentation cycles from days to seconds.",
+    bullets: [
+      "Engineered SOF-Forge, an agentic RAG pipeline using GPT-4.1, LangGraph, and Azure OpenAI, automating Summary of Findings generation from Dynamics 365 CRM data — cutting documentation time from 4 days to under 90 seconds.",
+      "Architected a multi-agent system with PII/PHI sanitization guardrails, Cosmos DB persistence, and Azure Blob Storage delivery via FastAPI — achieving zero data leakage across 100% of validated outputs.",
+      "Designed a dual-path LLM classification engine with prompt engineering and RAG across six parallel section generators, delivering audit-ready Word documents via SAS-authenticated APIs with latency under 30 seconds.",
+    ],
+    tags: ["GPT-4.1", "LangGraph", "Azure OpenAI", "RAG", "FastAPI", "Cosmos DB", "Multi-Agent", "Prompt Engineering"],
+    metrics: [
+      { value: "4d → 90s", label: "Documentation time" },
+      { value: "0", label: "Data leakage events" },
+      { value: "<30s", label: "Section latency" },
+    ],
+  },
+  {
     role: "Graduate Research Assistant",
     company: "Research Foundation for SUNY",
-    dates: "Jan 2026 to Present",
+    logo: "/images/SUNY Research Foundation.jpeg",
+    dates: "Jan 2026 – Present",
     location: "Buffalo, NY",
     current: true,
     summary:
@@ -36,7 +58,8 @@ const roles = [
   {
     role: "Technical Associate, Machine Learning & Data Systems",
     company: "Itron, Inc.",
-    dates: "Aug 2023 to Aug 2025",
+    logo: "/images/Itron.jpeg",
+    dates: "Aug 2023 – Aug 2025",
     location: "Bengaluru, India",
     summary:
       "Architected production ML pipelines for energy and utility analytics across MV-90xi meter data management.",
@@ -58,7 +81,8 @@ const roles = [
   {
     role: "Machine Learning Engineer",
     company: "Kyono Software Pvt. Ltd.",
-    dates: "Jun 2022 to Jul 2023",
+    logo: "/images/Kyono.jpeg",
+    dates: "Jun 2022 – Jul 2023",
     location: "Bengaluru, India",
     summary:
       "Delivered end-to-end ML solutions across e-commerce, healthcare, and retail, full lifecycle from data prep to deployment.",
@@ -79,7 +103,8 @@ const roles = [
   {
     role: "Data Science Intern, Air Force Defense Unit",
     company: "Bharat Electronics Limited",
-    dates: "Sep 2021 to Oct 2021",
+    logo: "/images/BEL.jpeg",
+    dates: "Sep 2021 – Oct 2021",
     location: "Bengaluru, India",
     summary:
       "Defense analytics for Indian Air Force systems in a mission-critical, security-restricted environment.",
@@ -95,10 +120,23 @@ function RoleCard({ r }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="card relative p-8 lg:p-10 hover:-translate-y-1 transition-transform">
-      <div className="flex items-start justify-between gap-6">
-        <div className="min-w-0">
-          <div className="flex items-center gap-2.5 flex-wrap mb-4">
+    <div className="card group relative h-full flex flex-col p-8 lg:p-10 hover:-translate-y-1 transition-transform">
+      <header className="flex items-start gap-5">
+        {r.logo ? (
+          <div className="shrink-0">
+            <div className="h-16 w-16 sm:h-[72px] sm:w-[72px] rounded-2xl bg-white ring-1 ring-[color:var(--border)] shadow-sm overflow-hidden flex items-center justify-center p-2 transition-transform duration-300 group-hover:scale-105">
+              <img
+                src={r.logo}
+                alt={`${r.company} logo`}
+                loading="lazy"
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+          </div>
+        ) : null}
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2.5 flex-wrap mb-3">
             <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
               {r.dates}
             </span>
@@ -110,7 +148,7 @@ function RoleCard({ r }) {
                 </span>
               </>
             ) : null}
-            {r.current ? (
+            {r.featured ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Current
@@ -123,12 +161,12 @@ function RoleCard({ r }) {
           </h3>
           <div className="mt-2 text-base font-medium text-[color:var(--muted)]">{r.company}</div>
         </div>
-      </div>
+      </header>
 
       <p className="mt-6 text-[17px] text-[color:var(--text)]/85 leading-relaxed">{r.summary}</p>
 
       {r.metrics ? (
-        <div className="mt-7 grid grid-cols-3 gap-3">
+        <div className="mt-6 grid grid-cols-3 gap-3">
           {r.metrics.map((m) => (
             <div
               key={m.label}
@@ -145,46 +183,48 @@ function RoleCard({ r }) {
         </div>
       ) : null}
 
-      <div
-        className={[
-          "grid transition-[grid-template-rows] duration-300 ease-in-out",
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-        ].join(" ")}
-      >
-        <div className="overflow-hidden">
-          <div className="mt-7 pt-7 border-t border-[color:var(--border)] space-y-3">
-            {r.bullets.map((b, i) => (
-              <div className="flex items-start gap-3" key={i}>
-                <span className="text-[color:var(--accent)] mt-2.5 inline-block h-1.5 w-1.5 rounded-full bg-current shrink-0" />
-                <span className="text-[15px] text-[color:var(--muted)] leading-relaxed">{b}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--text)] transition"
-        aria-expanded={open}
-      >
-        {open ? "Show less" : "Read full details"}
-        <svg
-          className={["w-3.5 h-3.5 transition-transform", open ? "rotate-180" : ""].join(" ")}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 9l6 6 6-6" />
-        </svg>
-      </button>
-
       <div className="mt-6 flex flex-wrap gap-2">
         {r.tags.map((t) => (
           <TagChip key={t}>{t}</TagChip>
         ))}
+      </div>
+
+      <div className="mt-auto">
+        <div
+          className={[
+            "grid transition-[grid-template-rows] duration-300 ease-in-out",
+            open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          ].join(" ")}
+        >
+          <div className="overflow-hidden">
+            <div className="mt-6 pt-6 border-t border-[color:var(--border)] space-y-3">
+              {r.bullets.map((b, i) => (
+                <div className="flex items-start gap-3" key={i}>
+                  <span className="text-[color:var(--accent)] mt-2.5 inline-block h-1.5 w-1.5 rounded-full bg-current shrink-0" />
+                  <span className="text-[15px] text-[color:var(--muted)] leading-relaxed">{b}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--text)] transition"
+          aria-expanded={open}
+        >
+          {open ? "Show less" : "Read full details"}
+          <svg
+            className={["w-3.5 h-3.5 transition-transform", open ? "rotate-180" : ""].join(" ")}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
       </div>
     </div>
   );
@@ -197,15 +237,15 @@ export default function Experience() {
         <SectionHeader
           index="03"
           label="experience"
-          title="From defense analytics to autonomous-vehicle research. Production ML across sectors."
-          subtitle="Four roles, three industries, one consistent thread: turning ambiguous data problems into measurable outcomes."
+          title="From defense analytics to agentic AI. Production ML across sectors."
+          subtitle="Five roles, four industries, one consistent thread: turning ambiguous data problems into measurable outcomes."
         />
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {roles.map((r, idx) => (
+          {roles.map((r) => (
             <div
               key={`${r.company}-${r.role}`}
-              className={roles.length % 2 === 1 && idx === roles.length - 1 ? "lg:col-span-2" : ""}
+              className={r.featured ? "lg:col-span-2" : ""}
             >
               <RoleCard r={r} />
             </div>

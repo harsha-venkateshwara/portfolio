@@ -6,11 +6,11 @@ export default function SectionHeader({ index, label, title, subtitle, align = "
         <span>{index}</span>
         <span>/ {label}</span>
       </div>
-      <h2 className="mt-6 font-display text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] xl:text-[4.5rem] font-bold tracking-tight text-[color:var(--text)] leading-[1.02]">
+      <h2 className="mt-6 font-display text-h2 font-bold text-[color:var(--text)]">
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-5 text-lg sm:text-xl text-[color:var(--muted)] leading-relaxed max-w-2xl">
+        <p className="mt-5 text-lead text-[color:var(--muted)] max-w-2xl">
           {subtitle}
         </p>
       ) : null}
