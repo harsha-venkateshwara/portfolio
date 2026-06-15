@@ -502,7 +502,7 @@ export default function Projects() {
             subtitle="A curated set of projects spanning deep learning, distributed ML, GenAI, causal inference, and full-stack data systems. Each one ships with the problem, the approach, and the measured outcome."
           />
           <a
-            href="https://github.com/harsha-venkateshwara"
+            href="https://github.com/harsha-venkateshwara?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary self-start sm:self-end shrink-0"
