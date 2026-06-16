@@ -74,7 +74,7 @@ function MessageBubble({ role, content, streaming }) {
   const isUser = role === "user";
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div className={`max-w-[88%] ${isUser ? "items-end" : "items-start"} flex flex-col gap-2`}>
+      <div className={`max-w-[85%] ${isUser ? "items-end" : "items-start"} flex flex-col gap-2`}>
         {!isUser ? (
           <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--subtle)] pl-1">
             Jarvis
@@ -82,7 +82,7 @@ function MessageBubble({ role, content, streaming }) {
         ) : null}
         <div
           className={[
-            "rounded-2xl px-5 py-3.5 text-[16px] leading-relaxed whitespace-pre-wrap break-words",
+            "rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-[15px] sm:text-[16px] leading-relaxed whitespace-pre-wrap break-words",
             isUser
               ? "bg-[color:var(--text)] text-[color:var(--bg)] rounded-br-md"
               : "bg-[color:var(--elevated)] text-[color:var(--text)] border border-[color:var(--border)] rounded-bl-md",
@@ -131,6 +131,18 @@ export default function Chatbot() {
     if (open && textareaRef.current) {
       setTimeout(() => textareaRef.current?.focus(), 80);
     }
+  }, [open]);
+
+  // Lock background scroll only while the panel is full-screen (mobile),
+  // so the desktop floating widget still lets the page scroll behind it.
+  useEffect(() => {
+    if (!open) return;
+    if (!window.matchMedia?.("(max-width: 639px)").matches) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   const send = useCallback(
@@ -290,24 +302,24 @@ export default function Chatbot() {
           role="dialog"
           aria-label="Chat with Jarvis"
           aria-modal="false"
-          className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-40 sm:w-[520px] sm:h-[760px] sm:max-h-[calc(100vh-3rem)] flex flex-col bg-[color:var(--surface)] border border-[color:var(--border-strong)] sm:rounded-3xl shadow-2xl shadow-black/40 overflow-hidden"
+          className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-[60] flex flex-col bg-[color:var(--surface)] border-0 sm:border border-[color:var(--border-strong)] sm:rounded-3xl shadow-2xl shadow-black/40 overflow-hidden sm:w-[400px] sm:h-[640px] sm:max-h-[calc(100dvh-7rem)]"
         >
-          <div className="flex items-center justify-between gap-3 px-6 py-5 border-b border-[color:var(--border)] bg-[color:var(--bg)]/50">
-            <div className="flex items-center gap-3.5">
-              <div className="grid h-11 w-11 place-items-center rounded-xl border border-[color:var(--border-strong)] bg-[color:var(--elevated)] text-[color:var(--text)]">
+          <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 sm:py-5 pt-[max(1rem,env(safe-area-inset-top))] sm:pt-5 border-b border-[color:var(--border)] bg-[color:var(--bg)]/50">
+            <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+              <div className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-xl border border-[color:var(--border-strong)] bg-[color:var(--elevated)] text-[color:var(--text)]">
                 <BotIcon className="w-5 h-5" />
               </div>
-              <div className="leading-tight">
+              <div className="leading-tight min-w-0">
                 <div className="text-base font-semibold text-[color:var(--text)] font-display tracking-tight">
                   Jarvis
                 </div>
-                <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-[color:var(--subtle)] mt-1 flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  AI · trained on Harsha's portfolio
+                <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.16em] text-[color:var(--subtle)] mt-1 flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="truncate">AI · trained on Harsha's portfolio</span>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
               <button
                 type="button"
                 onClick={reset}
@@ -330,7 +342,7 @@ export default function Chatbot() {
 
           <div
             ref={scrollRef}
-            className="flex-1 overflow-y-auto px-6 py-6 space-y-5"
+            className="flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6 space-y-4 sm:space-y-5"
           >
             {messages.map((m, i) => {
               const isStreamingLast =
@@ -368,7 +380,7 @@ export default function Chatbot() {
                       key={p}
                       type="button"
                       onClick={() => send(p)}
-                      className="text-left text-[15px] rounded-xl border border-[color:var(--border)] bg-[color:var(--elevated)] px-4 py-3 text-[color:var(--text)] hover:border-[color:var(--border-strong)] hover:-translate-y-0.5 transition-all"
+                      className="text-left text-[14px] sm:text-[15px] rounded-xl border border-[color:var(--border)] bg-[color:var(--elevated)] px-4 py-3 text-[color:var(--text)] hover:border-[color:var(--border-strong)] hover:-translate-y-0.5 transition-all"
                     >
                       {p}
                     </button>
@@ -380,7 +392,7 @@ export default function Chatbot() {
 
           <form
             onSubmit={handleSubmit}
-            className="border-t border-[color:var(--border)] bg-[color:var(--bg)]/40 px-5 py-4"
+            className="border-t border-[color:var(--border)] bg-[color:var(--bg)]/40 px-4 sm:px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:pb-4"
           >
             <div className="flex items-end gap-2.5 rounded-2xl border border-[color:var(--border-strong)] bg-[color:var(--surface)] px-4 py-3 focus-within:border-[color:var(--text)] transition">
               <textarea
