@@ -159,12 +159,12 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"
-                aria-label="Download résumé PDF"
+                aria-label="Download Resume PDF"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
                 </svg>
-                Download résumé
+                Download Resume
               </a>
 
               <div className="ml-1 flex items-center gap-1.5">
@@ -181,9 +181,9 @@ export default function Hero() {
             </div>
 
             <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 max-w-2xl border-t border-[color:var(--border)] pt-8">
-              <Meta label="Experience" value="3+ years" />
+              <Meta label="Experience" value="3.5+ years" />
               <Meta label="Focus" value="GenAI · ML · Data" />
-              <Meta label="Education" value="MS @ UB" />
+              <Meta label="Education" value="MS in CSE @ UB" />
               <Meta label="Currently" value="AI Engineer @ Commvault" />
             </div>
           </div>
@@ -195,12 +195,6 @@ export default function Hero() {
                 alt="Harsha Venkateshwara"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-5 left-5 inline-flex items-center gap-2 rounded-md bg-black/45 backdrop-blur px-2.5 py-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/90">
-                  HV · 2026
-                </span>
-              </div>
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-5">
                 <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/75">
                   Currently

@@ -20,7 +20,7 @@ const projects = [
     metrics: [
       { value: "0.91", label: "ROC-AUC (held-out 2022)" },
       { value: "#1", label: "Lee County rank pre-Ian" },
-      { value: "<2s", label: "20/20 Sandy substations" },
+      { value: "< 2s", label: "20/20 Sandy substations" },
     ],
     impact:
       "Model ranked Lee County, FL as the #1 outage-risk county pre-Hurricane Ian. Ian made direct landfall there on Sep 28, 2022. GridGuard detected 20/20 substations in the Sandy impact zone in under 2s, producing 29 prioritized alerts (14 critical hospitals, 15 fire stations).",
@@ -97,7 +97,7 @@ const projects = [
       "Built a 2,600+ line Streamlit app with seven pages: Dashboard, RAG Chatbot, Ticket Inbox, Email Automation Hub, Analytics, KB Admin, Settings. Designed a 5-layer intent router (greetings → hard escalation → 12 regex rules → FAISS similarity → Groq LLM) on Llama 3.3 70B with HuggingFace embeddings + FAISS for retrieval, SQLite for the operational store, and live IMAP/SMTP Gmail integration. Includes a production upgrade path via docker-compose (FastAPI + PostgreSQL + Redis).",
     metrics: [
       { value: "12", label: "Intents routed" },
-      { value: "<500ms", label: "Inference / query" },
+      { value: "< 500ms", label: "Inference / query" },
       { value: "2.6k", label: "Lines of production code" },
     ],
     impact:

@@ -78,7 +78,7 @@ export default function About() {
           index="01"
           label="about"
           title="AI Engineer, Data Scientist, and Graduate Researcher solving real-world problems."
-          subtitle="Cross-sector experience across energy, e-commerce, defense, and autonomous-vehicle research, paired with hands-on academic work in healthcare AI."
+          subtitle="Cross-sector experience across energy, e-commerce, defense, customer-facing and autonomous-vehicle research, paired with hands-on academic work in Agentic AI, LLMs, healthcare AI."
         />
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -168,9 +168,8 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <Stat value="3+" label="Years experience" />
-              <Stat value="4" label="Industries" />
-              <Stat value="8M+" label="Records modeled" />
+              <Stat value="3.5+" label="Years experience" />
+              <Stat value="5" label="Industries" />
               <Stat value="2" label="Countries" />
             </div>
 

@@ -14,7 +14,11 @@
       "Bash(git -C \"/mnt/c/Users/harsh/OneDrive - Global Academy of Technology/Desktop/myprojects/Harsha Venkateshwara - AI Engineer\" status)",
       "Bash(git -C \"/mnt/c/Users/harsh/OneDrive - Global Academy of Technology/Desktop/myprojects/Harsha Venkateshwara - AI Engineer\" diff --stat)",
       "Bash(npm run *)",
-      "Bash(node -e \"const s = require\\('fs'\\).readFileSync\\('src/sections/Experience.jsx', 'utf8'\\); console.log\\('lines:', s.split\\('\\\\n'\\).length\\); console.log\\('roles count:', \\(s.match\\(/role: \\\\\"/g\\) || []\\).length\\); console.log\\('featured count:', \\(s.match\\(/featured: true/g\\) || []\\).length\\); console.log\\('logo count:', \\(s.match\\(/logo: \\\\\"/g\\) || []\\).length\\);\")"
+      "Bash(node -e \"const s = require\\('fs'\\).readFileSync\\('src/sections/Experience.jsx', 'utf8'\\); console.log\\('lines:', s.split\\('\\\\n'\\).length\\); console.log\\('roles count:', \\(s.match\\(/role: \\\\\"/g\\) || []\\).length\\); console.log\\('featured count:', \\(s.match\\(/featured: true/g\\) || []\\).length\\); console.log\\('logo count:', \\(s.match\\(/logo: \\\\\"/g\\) || []\\).length\\);\")",
+      "Bash(node -e \"import\\('./lib/portfolio.js'\\).then\\(m=>{console.log\\('OK len:',m.SYSTEM_PROMPT.length\\); console.log\\('Commvault present:', m.PORTFOLIO_CONTEXT.includes\\('Commvault'\\)\\); console.log\\('roles X1-X5:', \\(m.PORTFOLIO_CONTEXT.match\\(/\\\\\\(X[1-5]\\\\\\)/g\\)||[]\\).join\\(' '\\)\\);}\\)\")",
+      "Bash(\"/mnt/c/Program Files/nodejs/node.exe\" -e \"import\\('./lib/portfolio.js'\\).then\\(m=>{console.log\\('Commvault present:', m.PORTFOLIO_CONTEXT.includes\\('Commvault'\\)\\); console.log\\('roles:', \\(m.PORTFOLIO_CONTEXT.match\\(/\\\\\\(X[1-9]\\\\\\)/g\\)||[]\\).join\\(' '\\)\\); console.log\\('repos:', \\(m.PORTFOLIO_CONTEXT.match\\(/Repo: /g\\)||[]\\).length\\);}\\)\")",
+      "Bash(\"/mnt/c/Program Files/nodejs/node.exe\" node_modules/eslint/bin/eslint.js lib/portfolio.js src/components/Chatbot.jsx)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }

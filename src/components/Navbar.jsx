@@ -127,7 +127,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[color:var(--text)] px-5 py-2.5 text-sm font-semibold text-[color:var(--bg)] hover:opacity-90 transition min-h-[44px]"
             >
-              Résumé
+              Resume
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17l10-10M17 7H8m9 0v9"/>
               </svg>

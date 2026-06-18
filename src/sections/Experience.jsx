@@ -25,17 +25,17 @@ const roles = [
     current: true,
     featured: true,
     summary:
-      "Building agentic RAG pipelines for automated Summary of Findings generation from Dynamics 365 CRM data, cutting documentation cycles from days to seconds.",
+      "Building RAG and Agentic AI pipelines for automated Summary of Findings generation from Alexandria and Dynamics 365 CRM data, cutting documentation drafting and generation cycles from days to seconds.",
     bullets: [
-      "Engineered SOF-Forge, an agentic RAG pipeline using GPT-4.1, LangGraph, and Azure OpenAI, automating Summary of Findings generation from Dynamics 365 CRM data — cutting documentation time from 4 days to under 90 seconds.",
-      "Architected a multi-agent system with PII/PHI sanitization guardrails, Cosmos DB persistence, and Azure Blob Storage delivery via FastAPI — achieving zero data leakage across 100% of validated outputs.",
+      "Engineered SOF-Forge, an agentic RAG pipeline using GPT-4.1, LangGraph, and Azure OpenAI, automating Summary of Findings generation from Dynamics 365 CRM data - cutting documentation time from 4 days to under 90 seconds.",
+      "Architected a multi-agent system with PII/PHI sanitization guardrails, Cosmos DB persistence, and Azure Blob Storage delivery via FastAPI - achieving zero data leakage across 100% of validated outputs.",
       "Designed a dual-path LLM classification engine with prompt engineering and RAG across six parallel section generators, delivering audit-ready Word documents via SAS-authenticated APIs with latency under 30 seconds.",
     ],
     tags: ["GPT-4.1", "LangGraph", "Azure OpenAI", "RAG", "FastAPI", "Cosmos DB", "Multi-Agent", "Prompt Engineering"],
     metrics: [
       { value: "4d → 90s", label: "Documentation time" },
       { value: "0", label: "Data leakage events" },
-      { value: "<30s", label: "Section latency" },
+      { value: "< 30s", label: "Section latency" },
     ],
   },
   {
@@ -62,20 +62,20 @@ const roles = [
     dates: "Aug 2023 – Aug 2025",
     location: "Bengaluru, India",
     summary:
-      "Architected production ML pipelines for energy and utility analytics across MV-90xi meter data management.",
+      "Architected production ML pipelines for energy and utility analytics across MV-90xi meter data management system.",
     bullets: [
       "Architected production ML pipelines for energy and utility analytics for MV-90xi meter data management application, supporting 8 to 10M+ smart-meter and sensor records across operational and analytical workflows.",
       "Engineered regression, classification, and time-series models for load forecasting and anomaly detection, achieving 18 to 30% performance gains over statistical baselines.",
       "Streamlined large-scale data processing via advanced feature engineering, reducing data noise by 25% and improving downstream model stability in production.",
       "Automated data ingestion, training, evaluation, and retraining workflows in Python, cutting manual analysis effort by 35% and accelerating experimentation cycles by 2×.",
-      "Collaborated with MV-90xi MDM product managers, domain experts, and engineers to translate ambiguous operational requirements into scalable ML solutions, sustaining a client satisfaction rating of 4.87/5 over two years.",
-      "Implemented continuous model validation and monitoring strategies, maintaining >90% accuracy under evolving data distributions.",
+      "Collaborated with MV-90xi MDM product managers, domain experts, and engineers to translate ambiguous operational requirements into scalable ML solutions, sustaining a client satisfaction rating of 4.92/5 over two years.",
+      "Implemented continuous model validation and monitoring strategies, maintaining > 90% accuracy under evolving data distributions.",
     ],
     tags: ["Python", "SQL", "Forecasting", "Classification", "Feature Engineering", "EDA", "Utility Analytics"],
     metrics: [
       { value: "8M+", label: "Records modeled" },
       { value: "30%", label: "Gain vs baseline" },
-      { value: "4.87/5", label: "Client rating" },
+      { value: "4.92/5", label: "Client rating" },
     ],
   },
   {

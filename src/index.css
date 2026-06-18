@@ -186,6 +186,13 @@ html:not(.dark) .vanta-net canvas { opacity: 0.18 !important; }
   border-radius: 6px;
 }
 
+/* The chat input draws its focus state on the wrapping container
+   (focus-within border), so suppress the global focus ring here to
+   avoid a second box inside the input. */
+.chat-input:focus-visible {
+  outline: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

@@ -4,9 +4,9 @@ const SESSION_KEY = "hv_chat_history_v1";
 
 const SUGGESTED_PROMPTS = [
   "What's Harsha's strongest project?",
-  "Walk me through his work experience",
+  "What's he building at Commvault?",
   "Is he open to remote AI/ML roles?",
-  "Which projects used PyTorch or LLMs?",
+  "Which projects used LLMs or RAG?",
 ];
 
 const WELCOME = {
@@ -315,7 +315,7 @@ export default function Chatbot() {
                 </div>
                 <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.16em] text-[color:var(--subtle)] mt-1 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="truncate">AI · trained on Harsha's portfolio</span>
+                  <span className="truncate">AI Assistant</span>
                 </div>
               </div>
             </div>
@@ -403,7 +403,7 @@ export default function Chatbot() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about a project, skill, or how to get in touch…"
                 aria-label="Message"
-                className="flex-1 resize-none bg-transparent text-[16px] text-[color:var(--text)] placeholder:text-[color:var(--subtle)] outline-none max-h-28"
+                className="chat-input flex-1 resize-none bg-transparent text-[16px] text-[color:var(--text)] placeholder:text-[color:var(--subtle)] outline-none max-h-28"
                 disabled={streaming}
               />
               <button
@@ -417,7 +417,7 @@ export default function Chatbot() {
             </div>
             <div className="mt-2.5 px-1 flex items-center justify-between gap-3">
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[color:var(--subtle)]">
-                AI · may make mistakes. Verify important details.
+                AI· Powered by Groq, may make mistakes. Verify important details.
               </span>
               {error ? (
                 <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-red-400">

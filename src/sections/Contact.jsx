@@ -95,7 +95,7 @@ export default function Contact() {
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
                     </svg>
-                    Résumé
+                    Resume
                   </a>
                 </div>
 

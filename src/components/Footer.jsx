@@ -8,7 +8,7 @@ export default function Footer() {
             © {year} · Harsha Venkateshwara
           </div>
           <div className="text-center text-sm text-[color:var(--muted)]">
-            Designed &amp; built with React, Tailwind, and intention.
+            Designed &amp; built with React, Tailwind, Curiosity and Purpose.
           </div>
           <div className="flex justify-start sm:justify-end gap-5 text-sm font-medium text-[color:var(--muted)]">
             <a
