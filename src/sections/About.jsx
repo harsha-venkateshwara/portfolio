@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import SectionHeader from "../components/SectionHeader";
+import Reveal from "../components/Reveal";
 
 const ArrowLeft = () => (
   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -23,18 +24,7 @@ const PlayIcon = () => (
 );
 
 function Chip({ children }) {
-  return (
-    <span
-      className="rounded-full border px-3.5 py-1.5 text-xs font-medium transition"
-      style={{
-        background: "var(--chip-bg)",
-        borderColor: "var(--chip-border)",
-        color: "var(--chip-text)",
-      }}
-    >
-      {children}
-    </span>
-  );
+  return <span className="chip">{children}</span>;
 }
 
 function Stat({ value, label }) {
@@ -81,7 +71,7 @@ export default function About() {
           subtitle="Cross-sector experience across energy, e-commerce, defense, customer-facing and autonomous-vehicle research, paired with hands-on academic work in Agentic AI, LLMs, healthcare AI."
         />
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <Reveal className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5">
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-xl shadow-black/20">
               <div
@@ -212,7 +202,7 @@ export default function About() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

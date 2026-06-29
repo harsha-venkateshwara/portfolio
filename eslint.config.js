@@ -26,4 +26,12 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    // Serverless functions (Vercel Edge) and shared server modules run in a
+    // Node/Edge runtime, not the browser — they need Node globals (process, etc.).
+    files: ['api/**/*.js', 'lib/**/*.js'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
 ])

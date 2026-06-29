@@ -1,4 +1,5 @@
 import SectionHeader from "../components/SectionHeader";
+import Reveal from "../components/Reveal";
 
 /**
  * Real projects sourced from ~/Desktop/myprojects.
@@ -253,26 +254,11 @@ function GhIcon() {
 }
 
 function TechChip({ children }) {
-  return (
-    <span className="rounded-full border border-[color:var(--border)] bg-[color:var(--surface)]/60 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--muted)]">
-      {children}
-    </span>
-  );
+  return <span className="chip chip--ghost">{children}</span>;
 }
 
 function SkillChip({ children }) {
-  return (
-    <span
-      className="rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em]"
-      style={{
-        background: "var(--chip-bg)",
-        borderColor: "var(--chip-border)",
-        color: "var(--chip-text)",
-      }}
-    >
-      {children}
-    </span>
-  );
+  return <span className="chip">{children}</span>;
 }
 
 function StatusBadge({ status }) {
@@ -346,7 +332,7 @@ function ProjectLinks({ p }) {
 
 function FeaturedCard({ p }) {
   return (
-    <div className="card group relative overflow-hidden p-8 lg:p-10 lg:col-span-2 hover:-translate-y-1 transition-transform">
+    <div className="card group relative overflow-hidden p-8 lg:p-10 hover:-translate-y-1 transition-transform">
       <div
         className={`pointer-events-none absolute -inset-px bg-gradient-to-br ${p.accent} opacity-60`}
       />
@@ -513,9 +499,13 @@ export default function Projects() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <FeaturedCard p={featured} />
-          {rest.map((p) => (
-            <ProjectCard key={p.id} p={p} />
+          <Reveal className="lg:col-span-2">
+            <FeaturedCard p={featured} />
+          </Reveal>
+          {rest.map((p, i) => (
+            <Reveal key={p.id} delay={Math.min(i, 3) * 0.08}>
+              <ProjectCard p={p} />
+            </Reveal>
           ))}
         </div>
       </div>

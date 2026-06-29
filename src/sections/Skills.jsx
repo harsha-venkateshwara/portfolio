@@ -1,21 +1,9 @@
 import React from "react";
 import SectionHeader from "../components/SectionHeader";
+import Reveal from "../components/Reveal";
 
 function SkillChip({ children }) {
-  return (
-    <span
-      style={{
-        background: "var(--chip-bg)",
-        borderColor: "var(--chip-border)",
-        color: "var(--chip-text)",
-      }}
-      className="rounded-full border px-3 py-1.5 text-[12px] font-mono font-medium transition"
-      onMouseEnter={(e) => (e.currentTarget.style.background = "var(--chip-bg-hover)")}
-      onMouseLeave={(e) => (e.currentTarget.style.background = "var(--chip-bg)")}
-    >
-      {children}
-    </span>
-  );
+  return <span className="chip">{children}</span>;
 }
 
 function Group({ title, items }) {
@@ -124,8 +112,10 @@ export default function Skills() {
         />
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {categories.map((c) => (
-            <CategoryCard key={c.id} {...c} />
+          {categories.map((c, i) => (
+            <Reveal key={c.id} delay={Math.min(i, 3) * 0.08}>
+              <CategoryCard {...c} />
+            </Reveal>
           ))}
         </div>
       </div>

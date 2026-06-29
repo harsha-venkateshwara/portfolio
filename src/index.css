@@ -1,64 +1,95 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN TOKENS
+   Light is the base (:root); dark is the default applied theme.
+   Signature palette: indigo -> violet on cool near-black.
+   ============================================================ */
 :root {
-  --bg: #fafafa;
+  /* Surfaces */
+  --bg: #f6f6fb;
   --surface: #ffffff;
-  --elevated: #f4f4f5;
-  --raised: rgba(9, 9, 11, 0.025);
+  --elevated: #f1f1f7;
+  --raised: rgba(10, 10, 15, 0.03);
 
-  --text: #09090b;
-  --muted: rgba(9, 9, 11, 0.68);
-  --subtle: rgba(9, 9, 11, 0.50);
+  /* Text */
+  --text: #0a0a0f;
+  --muted: rgba(10, 10, 15, 0.66);
+  --subtle: rgba(10, 10, 15, 0.46);
 
-  --border: rgba(9, 9, 11, 0.09);
-  --border-strong: rgba(9, 9, 11, 0.18);
+  /* Borders */
+  --border: rgba(10, 10, 15, 0.09);
+  --border-strong: rgba(10, 10, 15, 0.16);
 
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-soft: rgba(37, 99, 235, 0.08);
-  --accent-text: #1d4ed8;
+  /* Accent — indigo / violet */
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-2: #8b5cf6;
+  --accent-strong: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.09);
+  --accent-text: #4f46e5;
+
+  --grad-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --grad-cta: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --grad-text: linear-gradient(115deg, #4f46e5 0%, #7c3aed 55%, #6366f1 100%);
 
   --success: #059669;
   --success-soft: rgba(5, 150, 105, 0.10);
 
-  --chip-bg: rgba(37, 99, 235, 0.08);
-  --chip-bg-hover: rgba(37, 99, 235, 0.14);
-  --chip-text: #1d4ed8;
-  --chip-border: rgba(37, 99, 235, 0.22);
+  /* Chips */
+  --chip-bg: rgba(99, 102, 241, 0.08);
+  --chip-bg-hover: rgba(99, 102, 241, 0.15);
+  --chip-text: #4f46e5;
+  --chip-border: rgba(99, 102, 241, 0.22);
+
+  /* Depth */
+  --shadow-sm: 0 1px 2px rgba(10, 10, 15, 0.06), 0 2px 8px rgba(10, 10, 15, 0.04);
+  --shadow-md: 0 4px 24px rgba(10, 10, 15, 0.08);
+  --shadow-lg: 0 24px 60px -20px rgba(10, 10, 15, 0.16);
+  --glow: 0 12px 40px -12px rgba(99, 102, 241, 0.45);
 
   --card: var(--surface);
-
   --nav-h: 80px;
 }
 
 html.dark {
-  --bg: #07080b;
-  --surface: #0d0e12;
-  --elevated: #14151b;
-  --raised: rgba(255, 255, 255, 0.025);
+  --bg: #0a0a0f;
+  --surface: #101017;
+  --elevated: #16161f;
+  --raised: rgba(255, 255, 255, 0.03);
 
-  --text: #fafafa;
-  --muted: rgba(250, 250, 250, 0.70);
-  --subtle: rgba(250, 250, 250, 0.46);
+  --text: #f5f5f7;
+  --muted: rgba(245, 245, 247, 0.70);
+  --subtle: rgba(245, 245, 247, 0.45);
 
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.18);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.17);
 
-  --accent: #60a5fa;
-  --accent-hover: #93c5fd;
-  --accent-soft: rgba(96, 165, 250, 0.10);
-  --accent-text: #bfdbfe;
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-2: #a78bfa;
+  --accent-strong: #6366f1;
+  --accent-soft: rgba(129, 140, 248, 0.12);
+  --accent-text: #c7d2fe;
+
+  --grad-accent: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  --grad-cta: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --grad-text: linear-gradient(115deg, #a5b4fc 0%, #c4b5fd 55%, #818cf8 100%);
 
   --success: #34d399;
   --success-soft: rgba(52, 211, 153, 0.10);
 
-  --chip-bg: rgba(96, 165, 250, 0.10);
-  --chip-bg-hover: rgba(96, 165, 250, 0.18);
-  --chip-text: #dbeafe;
-  --chip-border: rgba(96, 165, 250, 0.28);
+  --chip-bg: rgba(129, 140, 248, 0.10);
+  --chip-bg-hover: rgba(129, 140, 248, 0.18);
+  --chip-text: #c7d2fe;
+  --chip-border: rgba(129, 140, 248, 0.26);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 30px 70px -25px rgba(0, 0, 0, 0.7);
+  --glow: 0 14px 50px -12px rgba(99, 102, 241, 0.55);
 
   --card: var(--surface);
-
   color-scheme: dark;
 }
 
@@ -80,11 +111,26 @@ body {
   overflow-x: clip;
 }
 
+/* Subtle film grain — kills banding on large dark fields and reads as
+   "premium print". Sits above section fills but below nav / chat / content
+   focus, and never intercepts pointer events. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+html:not(.dark) body::after { opacity: 0.02; }
+
 /* Fluid type scale — capped so headings stay MAANG-grade on 1440-1920px screens. */
 .text-display {
   font-size: clamp(2.5rem, 1.5rem + 4.4vw, 5rem);
   line-height: 1.04;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.028em;
 }
 .text-h2 {
   font-size: clamp(1.875rem, 1.25rem + 2.6vw, 3.25rem);
@@ -125,25 +171,97 @@ section[id] {
   color: var(--subtle);
 }
 
+/* Gradient ink for signature words / numerals. */
+.gradient-text {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============================================================
+   AURORA HERO BACKGROUND
+   Flowing indigo/violet/blue light blobs. Parent <section> clips
+   them (overflow-hidden), so the .aurora layer needs no clip and
+   can be parallax-shifted without revealing edges. Drift keyframes
+   are auto-killed by the prefers-reduced-motion block below.
+   ============================================================ */
+.aurora { position: absolute; }
+.aurora__blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  will-change: transform;
+}
+.aurora__b1 {
+  width: 48vw; height: 48vw; left: -8vw; top: -10vw;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.55), transparent 66%);
+  animation: aurora-drift-1 26s ease-in-out infinite;
+}
+.aurora__b2 {
+  width: 42vw; height: 42vw; right: -2vw; top: 2vw;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.50), transparent 66%);
+  animation: aurora-drift-2 32s ease-in-out infinite;
+}
+.aurora__b3 {
+  width: 40vw; height: 40vw; left: 20vw; bottom: -18vw;
+  background: radial-gradient(circle at center, rgba(56, 132, 246, 0.42), transparent 66%);
+  animation: aurora-drift-3 30s ease-in-out infinite;
+}
+.aurora__b4 {
+  width: 32vw; height: 32vw; right: 12vw; bottom: -10vw;
+  background: radial-gradient(circle at center, rgba(217, 70, 239, 0.30), transparent 66%);
+  animation: aurora-drift-1 38s ease-in-out infinite reverse;
+}
+.aurora__cursor {
+  position: absolute; left: 0; top: 0;
+  width: 520px; height: 520px; margin: -260px 0 0 -260px;
+  border-radius: 9999px; filter: blur(70px);
+  opacity: 0; transition: opacity 0.5s ease;
+  background: radial-gradient(circle at center, rgba(167, 139, 250, 0.40), transparent 60%);
+  will-change: transform;
+}
+.aurora.is-hover .aurora__cursor { opacity: 1; }
+
+html:not(.dark) .aurora__blob { filter: blur(110px); opacity: 0.6; }
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8%, 10%) scale(1.12); }
+  66% { transform: translate(-6%, 4%) scale(0.94); }
+}
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-10%, 9%) scale(1.14); }
+}
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(7%, -9%) scale(1.1); }
+  70% { transform: translate(-8%, -4%) scale(1); }
+}
+
 .theme-bg { background: var(--bg); }
 .theme-text { color: var(--text); }
 .theme-muted { color: var(--muted); }
 .theme-card { background: var(--surface); }
 .theme-border { border-color: var(--border); }
 
-.vanta-net canvas { opacity: 0.32 !important; }
-html:not(.dark) .vanta-net canvas { opacity: 0.18 !important; }
-
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--text); color: var(--bg);
+  background: var(--grad-cta); color: #ffffff;
   padding: 14px 26px; border-radius: 999px;
   font-weight: 600; font-size: 15px;
-  transition: opacity .2s ease, transform .2s ease;
-  border: 1px solid var(--text);
+  border: 1px solid transparent;
+  box-shadow: var(--glow);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
   min-height: 48px;
 }
-.btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 52px -10px rgba(99, 102, 241, 0.62);
+  filter: brightness(1.07) saturate(1.05);
+}
 
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 8px;
@@ -151,18 +269,78 @@ html:not(.dark) .vanta-net canvas { opacity: 0.18 !important; }
   padding: 14px 26px; border-radius: 999px;
   border: 1px solid var(--border-strong);
   font-weight: 600; font-size: 15px;
-  transition: background .2s ease, border-color .2s ease;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
   min-height: 48px;
 }
-.btn-secondary:hover { background: var(--raised); border-color: var(--text); }
+.btn-secondary:hover {
+  background: var(--raised);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 18px;
+  box-shadow: var(--shadow-sm);
   transition: border-color .3s ease, transform .35s ease, box-shadow .35s ease;
 }
-.card:hover { border-color: var(--border-strong); }
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Gradient hairline used to ring "spotlight" surfaces without changing layout. */
+.ring-gradient {
+  position: relative;
+}
+.ring-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--grad-accent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Canonical chip — one shape for every tag / tech / skill pill across the site.
+   `.chip` = accent (indigo), `.chip--ghost` = neutral. Fixed height keeps every
+   row perfectly aligned regardless of label length or an optional leading dot. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.chip:hover { background: var(--chip-bg-hover); }
+.chip--ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--muted);
+}
+.chip--ghost:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+  background: var(--raised);
+}
 
 .section-tag {
   display: inline-flex; align-items: center; gap: 12px;
@@ -177,7 +355,7 @@ html:not(.dark) .vanta-net canvas { opacity: 0.18 !important; }
   content: "";
   display: inline-block;
   width: 36px; height: 1px;
-  background: var(--border-strong);
+  background: linear-gradient(90deg, var(--accent), transparent);
 }
 
 *:focus-visible {

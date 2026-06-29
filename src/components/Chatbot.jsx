@@ -178,7 +178,9 @@ export default function Chatbot() {
           try {
             const data = await res.json();
             serverMsg = data?.error || null;
-          } catch {}
+          } catch {
+            // Response body was not JSON; fall back to the status-based message.
+          }
 
           let msg =
             serverMsg ||
@@ -223,7 +225,7 @@ export default function Chatbot() {
                   return next;
                 });
               }
-            } catch (err) {
+            } catch {
               // Skip malformed chunks
             }
           }
@@ -287,10 +289,11 @@ export default function Chatbot() {
           type="button"
           onClick={() => setOpen(true)}
           aria-label="Open chat with Jarvis"
-          className="fixed bottom-6 right-6 z-40 group inline-flex items-center gap-3 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] pl-5 pr-6 py-4 shadow-2xl shadow-black/30 hover:scale-105 transition-transform"
+          style={{ backgroundImage: "var(--grad-cta)" }}
+          className="fixed bottom-6 right-6 z-40 group inline-flex items-center gap-3 rounded-full text-white pl-5 pr-6 py-4 shadow-[0_16px_50px_-10px_rgba(99,102,241,0.65)] hover:scale-105 transition-transform"
         >
           <span className="relative grid place-items-center">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
+            <span className="absolute inline-flex h-full w-full rounded-full bg-white opacity-50 animate-ping" />
             <BotIcon className="w-6 h-6 relative" />
           </span>
           <span className="text-[15px] font-semibold">Ask Jarvis</span>
@@ -353,8 +356,8 @@ export default function Chatbot() {
                 <MessageBubble
                   key={i}
                   role={m.role}
-                  content={m.content || (isStreamingLast ? "" : "")}
-                  streaming={isStreamingLast && m.content.length === 0 ? false : isStreamingLast}
+                  content={m.content || ""}
+                  streaming={isStreamingLast && m.content.length > 0}
                 />
               );
             })}

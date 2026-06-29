@@ -1,19 +1,9 @@
 import React, { useState } from "react";
 import SectionHeader from "../components/SectionHeader";
+import Reveal from "../components/Reveal";
 
 function TagChip({ children }) {
-  return (
-    <span
-      className="rounded-full border px-3 py-1.5 text-[12px] font-medium font-mono"
-      style={{
-        background: "var(--chip-bg)",
-        borderColor: "var(--chip-border)",
-        color: "var(--chip-text)",
-      }}
-    >
-      {children}
-    </span>
-  );
+  return <span className="chip">{children}</span>;
 }
 
 const roles = [
@@ -148,7 +138,7 @@ function RoleCard({ r }) {
                 </span>
               </>
             ) : null}
-            {r.featured ? (
+            {r.current ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Current
@@ -238,17 +228,18 @@ export default function Experience() {
           index="03"
           label="experience"
           title="From defense analytics to agentic AI. Production ML across sectors."
-          subtitle="Five roles, four industries, one consistent thread: turning ambiguous data problems into measurable outcomes."
+          subtitle="Five roles, five industries, one consistent thread: turning ambiguous data problems into measurable outcomes."
         />
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {roles.map((r) => (
-            <div
+          {roles.map((r, i) => (
+            <Reveal
               key={`${r.company}-${r.role}`}
+              delay={Math.min(i, 3) * 0.08}
               className={r.featured ? "lg:col-span-2" : ""}
             >
               <RoleCard r={r} />
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

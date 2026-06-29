@@ -1,6 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import Globe from "react-globe.gl";
+import React, { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import SectionHeader from "../components/SectionHeader";
+
+// Heavy (pulls in three.js). Code-split so it never blocks first paint, and is
+// only fetched/mounted once the Personal section is near the viewport.
+const Globe = lazy(() => import("react-globe.gl"));
 
 export default function Personal() {
   const photos = useMemo(
@@ -54,14 +57,10 @@ export default function Personal() {
   }, [active, playing, total]);
 
   useEffect(() => {
-    setIdx((p) => Math.min(p, Math.max(0, total - 1)));
-  }, [total]);
-
-  useEffect(() => {
     if (active !== "photo") return;
     const onKey = (e) => {
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") setIdx((p) => (p - 1 + total) % total);
+      if (e.key === "ArrowRight") setIdx((p) => (p + 1) % total);
       if (e.key === " ") setPlaying((s) => !s);
     };
     window.addEventListener("keydown", onKey);
@@ -72,8 +71,10 @@ export default function Personal() {
 
   const globeWrapRef = useRef(null);
   const globeRef = useRef(null);
+  const sectionRef = useRef(null);
   const [globeSize, setGlobeSize] = useState({ w: 0, h: 0 });
   const [globeReady, setGlobeReady] = useState(false);
+  const [inView, setInView] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -82,6 +83,24 @@ export default function Personal() {
     const mo = new MutationObserver(update);
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
+  }, []);
+
+  // Defer mounting the globe (and fetching the three.js chunk) until the
+  // section is approaching the viewport.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   useEffect(() => {
@@ -125,7 +144,6 @@ export default function Personal() {
       controls.zoomSpeed = 0.7;
     }
     globeRef.current.pointOfView({ lat: 20, lng: -40, altitude: 2.2 }, 0);
-    setGlobeReady(true);
   }, [active]);
 
   const globeImageUrl = "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
@@ -134,7 +152,7 @@ export default function Personal() {
     : "//unpkg.com/three-globe/example/img/sky.png";
 
   return (
-    <section id="personal" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+    <section ref={sectionRef} id="personal" className="py-24 lg:py-32 bg-[color:var(--bg)]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
           index="06"
@@ -207,22 +225,25 @@ export default function Personal() {
                     className="w-full h-80 sm:h-96 md:h-[520px] rounded-2xl overflow-hidden bg-[color:var(--surface)] border border-[color:var(--border)] shadow-xl shadow-black/20"
                   >
                     <div className="w-full h-full flex items-center justify-center">
-                      {globeSize.w > 0 && globeSize.h > 0 ? (
-                        <Globe
-                          ref={globeRef}
-                          width={globeSize.w}
-                          height={globeSize.h}
-                          backgroundColor="rgba(0,0,0,0)"
-                          globeImageUrl={globeImageUrl}
-                          backgroundImageUrl={bgImageUrl}
-                          pointsData={travelPins}
-                          pointLat="lat"
-                          pointLng="lng"
-                          pointColor="color"
-                          pointAltitude={0.02}
-                          pointRadius={0.35}
-                          pointLabel={(d) => d.label}
-                        />
+                      {inView && globeSize.w > 0 && globeSize.h > 0 ? (
+                        <Suspense fallback={null}>
+                          <Globe
+                            ref={globeRef}
+                            width={globeSize.w}
+                            height={globeSize.h}
+                            backgroundColor="rgba(0,0,0,0)"
+                            globeImageUrl={globeImageUrl}
+                            backgroundImageUrl={bgImageUrl}
+                            pointsData={travelPins}
+                            pointLat="lat"
+                            pointLng="lng"
+                            pointColor="color"
+                            pointAltitude={0.02}
+                            pointRadius={0.35}
+                            pointLabel={(d) => d.label}
+                            onGlobeReady={() => setGlobeReady(true)}
+                          />
+                        </Suspense>
                       ) : null}
                     </div>
 

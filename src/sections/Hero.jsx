@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
-import NET from "vanta/dist/vanta.net.min.js";
+import { motion, useReducedMotion } from "framer-motion";
+import NeuralBackground from "../components/NeuralBackground";
 
 function StatusPill() {
   return (
@@ -44,77 +43,25 @@ function IconBtn({ href, label, children }) {
 }
 
 export default function Hero() {
-  const vantaRef = useRef(null);
-  const effectRef = useRef(null);
-
-  useEffect(() => {
-    if (!effectRef.current && vantaRef.current) {
-      const isDark = document.documentElement.classList.contains("dark");
-      try {
-        effectRef.current = NET({
-          el: vantaRef.current,
-          THREE,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          backgroundColor: isDark ? 0x07080b : 0xfafafa,
-          showDots: true,
-          color: isDark ? 0x2b3a55 : 0x94a3b8,
-          points: 8,
-          maxDistance: 25,
-          spacing: 20,
-        });
-      } catch (err) {
-        console.warn("Vanta init failed; continuing without background.", err);
-      }
-    }
-    const forceResize = () => window.dispatchEvent(new Event("resize"));
-    const t1 = setTimeout(forceResize, 50);
-    const t2 = setTimeout(forceResize, 250);
-    const t3 = setTimeout(forceResize, 800);
-    window.addEventListener("resize", forceResize);
-    return () => {
-      window.removeEventListener("resize", forceResize);
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      if (effectRef.current) {
-        effectRef.current.destroy();
-        effectRef.current = null;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const sync = () => {
-      if (!effectRef.current) return;
-      const isDark = root.classList.contains("dark");
-      try {
-        effectRef.current.setOptions({
-          backgroundColor: isDark ? 0x07080b : 0xfafafa,
-          color: isDark ? 0x2b3a55 : 0x94a3b8,
-        });
-      } catch (err) {
-        // Vanta NET's internal materials can be out of sync with newer Three.js
-        // versions; failures here should not crash the page.
-        console.warn("Vanta setOptions failed.", err);
-      }
-    };
-    sync();
-    const obs = new MutationObserver(sync);
-    obs.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, []);
+  const reduce = useReducedMotion();
+  const MotionDiv = motion.div;
+  const fadeUp = (delay = 0) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 22 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
+        };
 
   return (
     <section id="home" className="relative isolate overflow-hidden">
-      <div ref={vantaRef} className="absolute inset-0 z-0 pointer-events-none vanta-net" />
+      <NeuralBackground className="absolute inset-0 z-0 pointer-events-none" />
       <div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 10%, transparent 0%, transparent 35%, var(--bg) 95%)",
+            "radial-gradient(125% 90% at 62% 18%, transparent 32%, var(--bg) 100%), linear-gradient(to bottom, transparent 68%, var(--bg) 100%)",
         }}
       />
 
@@ -127,14 +74,14 @@ export default function Hero() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
-          <div className="lg:col-span-8">
+          <MotionDiv className="lg:col-span-8" {...fadeUp(0.05)}>
             <p className="eyebrow mb-6">Harsha Venkateshwara · portfolio.2026</p>
 
             <h1 className="font-display font-bold text-display text-[color:var(--text)]">
               Building intelligent systems
               <br className="hidden sm:block" />{" "}
               that turn raw data into{" "}
-              <span className="italic font-medium text-[color:var(--accent-text)]">
+              <span className="italic font-medium gradient-text">
                 shipped product.
               </span>
             </h1>
@@ -186,9 +133,17 @@ export default function Hero() {
               <Meta label="Education" value="MS in CSE @ UB" />
               <Meta label="Currently" value="AI Engineer @ Commvault" />
             </div>
-          </div>
+          </MotionDiv>
 
-          <div className="lg:col-span-4">
+          <MotionDiv className="lg:col-span-4 relative" {...fadeUp(0.2)}>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-8 blur-3xl opacity-60"
+              style={{
+                background:
+                  "radial-gradient(52% 50% at 50% 32%, rgba(99,102,241,0.40), transparent 72%)",
+              }}
+            />
             <div className="relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] aspect-[4/5] shadow-xl shadow-black/20">
               <img
                 src="/images/hv.jpg"
@@ -227,7 +182,7 @@ export default function Hero() {
                 className="h-10 w-auto opacity-85 hover:opacity-100 transition"
               />
             </div>
-          </div>
+          </MotionDiv>
         </div>
       </div>
     </section>

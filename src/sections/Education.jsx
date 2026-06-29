@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SectionHeader from "../components/SectionHeader";
+import Reveal from "../components/Reveal";
 
 export default function Education() {
   const [openPg, setOpenPg] = useState(false);
@@ -56,11 +57,9 @@ export default function Education() {
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-6">
           {schools.map((s, i) => (
-            <div
-              key={s.name}
-              className="card relative p-8 hover:-translate-y-1 transition-transform"
-            >
-              <div className="absolute top-8 right-8 font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
+            <Reveal key={s.name} delay={Math.min(i, 2) * 0.1}>
+              <div className="card relative p-8 hover:-translate-y-1 transition-transform">
+                <div className="absolute top-8 right-8 font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">
                 {String(i + 1).padStart(2, "0")}
               </div>
 
@@ -100,7 +99,8 @@ export default function Education() {
                   </li>
                 ))}
               </ul>
-            </div>
+              </div>
+            </Reveal>
           ))}
         </div>
 

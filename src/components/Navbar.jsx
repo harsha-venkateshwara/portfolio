@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { label: "About", href: "#about", n: "01" },
@@ -18,13 +18,11 @@ function getInitialTheme() {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(getInitialTheme);
   const [activeHref, setActiveHref] = useState("#home");
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    setTheme(getInitialTheme());
-  }, []);
+  const lockRef = useRef(false);
+  const lockTimer = useRef(0);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -33,31 +31,39 @@ export default function Navbar() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+  // One passive, rAF-throttled scroll listener drives both the nav background
+  // and the active-section highlight. A deterministic offsetTop check is instant
+  // and accurate (the IntersectionObserver version lagged / stuck on tall
+  // sections — what read as "the violet renders slow"). Suppressed while a
+  // click-triggered smooth scroll is in flight so the pill doesn't wander.
   useEffect(() => {
     const ids = ["home", ...links.map((l) => l.href.replace("#", ""))];
-    const els = ids.map((id) => document.getElementById(id)).filter(Boolean);
-    if (!els.length) return;
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))[0];
-        if (!visible?.target?.id) return;
-        setActiveHref(`#${visible.target.id}`);
-      },
-      { root: null, rootMargin: "-30% 0px -60% 0px", threshold: [0.05, 0.12, 0.2] }
-    );
-
-    els.forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
+    let ticking = false;
+    const measure = () => {
+      ticking = false;
+      setScrolled(window.scrollY > 8);
+      if (lockRef.current) return;
+      const line = window.scrollY + 110;
+      let current = "home";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= line) current = id;
+      }
+      const next = `#${current}`;
+      setActiveHref((prev) => (prev === next ? prev : next));
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -67,19 +73,35 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
+  const onNavClick = (e, href) => {
+    const el = document.getElementById(href.slice(1));
+    if (!el) return;
+    e.preventDefault();
+    lockRef.current = true;
+    clearTimeout(lockTimer.current);
+    lockTimer.current = setTimeout(() => {
+      lockRef.current = false;
+    }, 700);
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    setActiveHref(href);
+    window.history.replaceState(null, "", href);
+  };
+
   return (
     <header data-navbar="true" className="fixed inset-x-0 top-0 z-50">
       <div
         className={[
           "w-full transition-all duration-300",
           scrolled
-            ? "backdrop-blur-xl border-b border-[color:var(--border)] bg-[color:var(--bg)]/85"
+            ? "backdrop-blur-md border-b border-[color:var(--border)] bg-[color:var(--bg)]/85"
             : "bg-transparent",
         ].join(" ")}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
           <a
             href="#home"
+            onClick={(e) => onNavClick(e, "#home")}
             className="group inline-flex items-center gap-3 text-[color:var(--text)]"
             aria-label="Home"
           >
@@ -107,11 +129,11 @@ export default function Navbar() {
                 <a
                   key={l.href}
                   href={l.href}
+                  onClick={(e) => onNavClick(e, l.href)}
+                  style={active ? { backgroundImage: "var(--grad-cta)", color: "#fff" } : undefined}
                   className={[
                     "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                    active
-                      ? "bg-[color:var(--text)] text-[color:var(--bg)]"
-                      : "text-[color:var(--muted)] hover:text-[color:var(--text)]",
+                    active ? "" : "text-[color:var(--muted)] hover:text-[color:var(--text)]",
                   ].join(" ")}
                 >
                   {l.label}
@@ -181,7 +203,10 @@ export default function Navbar() {
                   <a
                     key={l.href}
                     href={l.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      onNavClick(e, l.href);
+                      setMobileOpen(false);
+                    }}
                     className={[
                       "flex items-center justify-between rounded-xl px-4 py-4 text-base",
                       active

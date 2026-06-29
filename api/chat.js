@@ -107,7 +107,6 @@ export default async function handler(req) {
     });
 
   let groqRes;
-  let lastErr;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       groqRes = await callGroq();
@@ -118,8 +117,7 @@ export default async function handler(req) {
         continue;
       }
       break;
-    } catch (err) {
-      lastErr = err;
+    } catch {
       if (attempt === 0) {
         await new Promise((r) => setTimeout(r, 400));
         continue;
@@ -138,7 +136,9 @@ export default async function handler(req) {
     let detail = "";
     try {
       detail = (await groqRes.text()).slice(0, 240);
-    } catch {}
+    } catch {
+      // Upstream body unreadable; report the status code only.
+    }
 
     // Pass through rate-limit as 429 so the client shows the right message.
     if (groqRes.status === 429) {
@@ -197,7 +197,7 @@ export default async function handler(req) {
             }
           }
         }
-      } catch (err) {
+      } catch {
         controller.enqueue(
           encoder.encode(`data: ${JSON.stringify({ error: "Stream interrupted" })}\n\n`)
         );

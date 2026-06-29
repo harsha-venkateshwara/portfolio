@@ -1,5 +1,6 @@
 import React from "react";
 import SectionHeader from "../components/SectionHeader";
+import Reveal from "../components/Reveal";
 
 const LinkedInIcon = ({ className = "" }) => (
   <svg className={`w-5 h-5 ${className}`} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -36,8 +37,8 @@ export default function Contact() {
           subtitle="Always happy to connect, collaborate, or simply have a great conversation."
         />
 
-        <div className="mt-16 max-w-6xl mx-auto">
-          <div className="card relative overflow-hidden p-10 sm:p-14">
+        <Reveal className="mt-16 max-w-6xl mx-auto">
+          <div className="card ring-gradient relative overflow-hidden p-10 sm:p-14">
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -101,10 +102,7 @@ export default function Contact() {
 
                 <div className="mt-7 flex flex-wrap gap-2">
                   {["AI/ML", "Data Science", "Analytics", "GenAI", "MLOps"].map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-[color:var(--chip-border)] bg-[color:var(--chip-bg)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-[color:var(--chip-text)]"
-                    >
+                    <span key={t} className="chip">
                       {t}
                     </span>
                   ))}
@@ -136,31 +134,15 @@ export default function Contact() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
 function InfoRow({ icon, label, value, href }) {
-  const Wrapper = ({ children }) =>
-    href ? (
-      <a
-        href={href}
-        target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="group flex items-center gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)]/60 backdrop-blur p-4 hover:border-[color:var(--border-strong)] transition"
-      >
-        {children}
-      </a>
-    ) : (
-      <div className="flex items-center gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)]/60 backdrop-blur p-4">
-        {children}
-      </div>
-    );
-
-  return (
-    <Wrapper>
+  const inner = (
+    <>
       <span className="grid h-12 w-12 place-items-center rounded-lg border border-[color:var(--border)] bg-[color:var(--elevated)] text-[color:var(--muted)] shrink-0">
         {icon}
       </span>
@@ -177,6 +159,25 @@ function InfoRow({ icon, label, value, href }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       ) : null}
-    </Wrapper>
+    </>
+  );
+
+  if (!href) {
+    return (
+      <div className="flex items-center gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)]/60 backdrop-blur p-4">
+        {inner}
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      className="group flex items-center gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)]/60 backdrop-blur p-4 hover:border-[color:var(--border-strong)] transition"
+    >
+      {inner}
+    </a>
   );
 }

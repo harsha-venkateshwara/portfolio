@@ -1,0 +1,13 @@
+# Normalize line endings to LF on commit, regardless of the OS / editor / OneDrive sync
+# that touched the file. Prevents spurious CRLF-only diffs.
+* text=auto eol=lf
+
+# Treat binaries as binary (never modify line endings or attempt diffs).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg binary
+*.pdf binary
+*.ico binary
+*.woff binary
+*.woff2 binary
