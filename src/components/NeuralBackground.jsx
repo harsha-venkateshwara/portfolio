@@ -28,10 +28,12 @@ export default function NeuralBackground({ className = "" }) {
     const isDark = () => document.documentElement.classList.contains("dark");
     const palette = () =>
       isDark()
-        ? { line: "255,255,255", base: 0.05, node: "199,210,254", a: "129,140,248", a2: "167,139,250", halo: 0.16 }
-        : { line: "10,10,15", base: 0.06, node: "79,70,229", a: "99,102,241", a2: "124,58,237", halo: 0.10 };
+        ? { line: "165,180,252", base: 0.07, node: "199,210,254", nodeA: 0.6, a: "129,140,248", a2: "167,139,250", halo: 0.18 }
+        // Light mode: an indigo web reads almost nothing as faint gray, so the
+        // links are tinted indigo and pushed much brighter, with bolder nodes.
+        : { line: "99,102,241", base: 0.20, node: "79,70,229", nodeA: 0.85, a: "79,70,229", a2: "124,58,237", halo: 0.16 };
 
-    const LINK_DIST = 145;
+    const LINK_DIST = 155;
     const MOUSE_R = 175;
     const mouse = { x: -9999, y: -9999, active: false };
 
@@ -159,8 +161,8 @@ export default function NeuralBackground({ className = "" }) {
         ctx.arc(n.x, n.y, n.r + prox * 1.5, 0, Math.PI * 2);
         ctx.fillStyle =
           prox > 0.02
-            ? `rgba(${p.a}, ${0.5 + 0.5 * prox})`
-            : `rgba(${p.node}, 0.5)`;
+            ? `rgba(${p.a}, ${Math.min(1, p.nodeA + 0.4 * prox)})`
+            : `rgba(${p.node}, ${p.nodeA})`;
         ctx.fill();
       }
 
