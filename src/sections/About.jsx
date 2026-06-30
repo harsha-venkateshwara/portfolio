@@ -62,7 +62,7 @@ export default function About() {
   const next = () => setIndex((i) => (i + 1) % images.length);
 
   return (
-    <section id="about" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+    <section id="about" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
           index="01"

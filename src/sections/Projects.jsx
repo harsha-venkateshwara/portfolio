@@ -478,7 +478,7 @@ export default function Projects() {
   const [featured, ...rest] = projects;
 
   return (
-    <section id="projects" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+    <section id="projects" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
           <SectionHeader

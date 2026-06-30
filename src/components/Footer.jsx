@@ -1,7 +1,7 @@
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-[color:var(--border)] bg-[color:var(--bg)]">
+    <footer className="border-t border-[color:var(--border)]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
           <div className="font-mono text-[12px] uppercase tracking-[0.18em] text-[color:var(--subtle)]">

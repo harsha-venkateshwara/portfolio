@@ -102,7 +102,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+    <section id="skills" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
           index="05"

@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from "framer-motion";
-import NeuralBackground from "../components/NeuralBackground";
 
 function StatusPill() {
   return (
@@ -55,16 +54,7 @@ export default function Hero() {
         };
 
   return (
-    <section id="home" className="relative isolate overflow-hidden">
-      <NeuralBackground className="absolute inset-0 z-0 pointer-events-none" />
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(125% 90% at 62% 18%, transparent 32%, var(--bg) 100%), linear-gradient(to bottom, transparent 68%, var(--bg) 100%)",
-        }}
-      />
-
+    <section id="home" className="relative isolate">
       <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 pt-28 pb-20 lg:pt-32 lg:pb-24">
         <div className="mb-10 flex flex-wrap items-center gap-4">
           <StatusPill />

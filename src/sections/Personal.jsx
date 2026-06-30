@@ -152,7 +152,7 @@ export default function Personal() {
     : "//unpkg.com/three-globe/example/img/sky.png";
 
   return (
-    <section ref={sectionRef} id="personal" className="py-24 lg:py-32 bg-[color:var(--bg)]">
+    <section ref={sectionRef} id="personal" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
           index="06"
